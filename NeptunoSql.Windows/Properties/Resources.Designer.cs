@@ -123,6 +123,16 @@ namespace NeptunoSql.Windows.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Neptuno_su_reino_su_mito_y_mucho_mas_1 {
+            get {
+                object obj = ResourceManager.GetObject("Neptuno-su-reino-su-mito-y-mucho-mas-1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Nuevo {
             get {
                 object obj = ResourceManager.GetObject("Nuevo", resourceCulture);
