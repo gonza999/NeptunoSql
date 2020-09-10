@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NeptunoSql.DataLayer.Repositorios.Facades
 {
-    interface IRepositorioCategorias
+    public interface IRepositorioCategorias
     {
         Categoria GetCategoriaPorId(int id);
         List<Categoria> GetLista();

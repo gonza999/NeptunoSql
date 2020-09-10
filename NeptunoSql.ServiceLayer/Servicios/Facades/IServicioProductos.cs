@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NeptunoSql.ServiceLayer.Servicios.Facades
 {
-    interface IServicioProductos
+    public interface IServicioProductos
     {
         Producto GetProductoPorId(int id);
         List<Producto> GetLista();

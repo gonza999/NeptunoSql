@@ -68,60 +68,61 @@
             this.ventasToolStripMenuItem,
             this.devolucionesToolStripMenuItem});
             this.archivosToolStripMenuItem.Name = "archivosToolStripMenuItem";
-            this.archivosToolStripMenuItem.Size = new System.Drawing.Size(65, 19);
+            this.archivosToolStripMenuItem.Size = new System.Drawing.Size(82, 24);
             this.archivosToolStripMenuItem.Text = "Archivos";
             // 
             // marcasToolStripMenuItem
             // 
             this.marcasToolStripMenuItem.Name = "marcasToolStripMenuItem";
-            this.marcasToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.marcasToolStripMenuItem.Size = new System.Drawing.Size(203, 24);
             this.marcasToolStripMenuItem.Text = "Marcas";
             this.marcasToolStripMenuItem.Click += new System.EventHandler(this.marcasToolStripMenuItem_Click);
             // 
             // categoríasToolStripMenuItem
             // 
             this.categoríasToolStripMenuItem.Name = "categoríasToolStripMenuItem";
-            this.categoríasToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.categoríasToolStripMenuItem.Size = new System.Drawing.Size(203, 24);
             this.categoríasToolStripMenuItem.Text = "Categorías";
+            this.categoríasToolStripMenuItem.Click += new System.EventHandler(this.categoríasToolStripMenuItem_Click);
             // 
             // productosToolStripMenuItem
             // 
             this.productosToolStripMenuItem.Name = "productosToolStripMenuItem";
-            this.productosToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.productosToolStripMenuItem.Size = new System.Drawing.Size(203, 24);
             this.productosToolStripMenuItem.Text = "Productos";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(165, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(200, 6);
             // 
             // servicioDeEnvíosToolStripMenuItem
             // 
             this.servicioDeEnvíosToolStripMenuItem.Name = "servicioDeEnvíosToolStripMenuItem";
-            this.servicioDeEnvíosToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.servicioDeEnvíosToolStripMenuItem.Size = new System.Drawing.Size(203, 24);
             this.servicioDeEnvíosToolStripMenuItem.Text = "Servicio de Envíos";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(165, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(200, 6);
             // 
             // ventasToolStripMenuItem
             // 
             this.ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
-            this.ventasToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.ventasToolStripMenuItem.Size = new System.Drawing.Size(203, 24);
             this.ventasToolStripMenuItem.Text = "Ventas";
             // 
             // devolucionesToolStripMenuItem
             // 
             this.devolucionesToolStripMenuItem.Name = "devolucionesToolStripMenuItem";
-            this.devolucionesToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.devolucionesToolStripMenuItem.Size = new System.Drawing.Size(203, 24);
             this.devolucionesToolStripMenuItem.Text = "Devoluciones";
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(41, 19);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 

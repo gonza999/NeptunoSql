@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NeptunoSql.DataLayer.Repositorios.Facades
 {
-    interface IRepositorioMedidas
+    public interface IRepositorioMedidas
     {
         Medida GetMedidaPorId(int id);
         List<Medida> GetLista();
