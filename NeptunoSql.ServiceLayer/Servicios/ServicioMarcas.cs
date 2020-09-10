@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using NeptunoSql.BusinessLayer.Entities;
 using NeptunoSql.DataLayer;
 using NeptunoSql.DataLayer.Repositorios;
