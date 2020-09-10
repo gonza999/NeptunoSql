@@ -78,9 +78,9 @@ namespace NeptunoSql.DataLayer.Repositorios
 
         public Categoria GetCategoriaPorId(int id)
         {
-            Categoria categoria = new Categoria();
             try
             {
+                Categoria categoria = null;
                 string cadenaDeComando = "SELECT CategoriaId,NombreCategoria,Descripcion FROM Categorias WHERE CategoriaId=@id";
                 SqlCommand comando = new SqlCommand(cadenaDeComando, conexion);
                 comando.Parameters.AddWithValue("@id",id);
@@ -133,12 +133,13 @@ namespace NeptunoSql.DataLayer.Repositorios
 
         public void Guardar(Categoria categoria)
         {
+            SqlCommand comando;
             if (categoria.CategoriaId==0)
             {
                 try
                 {
                     var cadenaDeConexion = "INSERT INTO Categorias (NombreCategoria,Descripcion) VALUES (@nombre,@descripcion)";
-                    var comando = new SqlCommand(cadenaDeConexion, conexion);
+                    comando = new SqlCommand(cadenaDeConexion, conexion);
                     comando.Parameters.AddWithValue("@nombre", categoria.NombreCategoria);
                     comando.Parameters.AddWithValue("@descripcion", categoria.Descripcion);
                     comando.ExecuteNonQuery();
@@ -157,7 +158,7 @@ namespace NeptunoSql.DataLayer.Repositorios
                 try
                 {
                     string cadenaComando = "UPDATE Categorias SET NombreCategoria=@nombre WHERE CategoriaId=@id";
-                    SqlCommand comando = new SqlCommand(cadenaComando, conexion);
+                    comando = new SqlCommand(cadenaComando, conexion);
                     comando.Parameters.AddWithValue("@nombre", categoria.NombreCategoria);
                     comando.Parameters.AddWithValue("@id", categoria.NombreCategoria);
                     comando.ExecuteNonQuery();
