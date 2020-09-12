@@ -34,5 +34,17 @@ namespace NeptunoSql.Windows
             FrmCategorias frm = new FrmCategorias();
             frm.ShowDialog(this);
         }
+
+        private void medidasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmMedidas frm = new FrmMedidas();
+            frm.ShowDialog(this);
+        }
+
+        private void productosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmProductos frm = new FrmProductos();
+            frm.ShowDialog(this);
+        }
     }
 }

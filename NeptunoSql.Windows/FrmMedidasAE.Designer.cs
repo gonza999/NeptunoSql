@@ -1,6 +1,6 @@
 ﻿namespace NeptunoSql.Windows
 {
-    partial class FrmMarcasAE
+    partial class FrmMedidasAE
     {
         /// <summary>
         /// Required designer variable.
@@ -29,43 +29,41 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.TextBoxMarca = new System.Windows.Forms.TextBox();
+            this.txtMedida = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtAbreviatura = new System.Windows.Forms.TextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
-            // TextBoxMarca
+            // txtMedida
             // 
-            this.TextBoxMarca.Location = new System.Drawing.Point(113, 45);
-            this.TextBoxMarca.MaxLength = 100;
-            this.TextBoxMarca.Name = "TextBoxMarca";
-            this.TextBoxMarca.Size = new System.Drawing.Size(354, 20);
-            this.TextBoxMarca.TabIndex = 8;
+            this.txtMedida.Location = new System.Drawing.Point(114, 29);
+            this.txtMedida.MaxLength = 20;
+            this.txtMedida.Name = "txtMedida";
+            this.txtMedida.Size = new System.Drawing.Size(354, 20);
+            this.txtMedida.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(53, 48);
+            this.label1.Location = new System.Drawing.Point(54, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Marca:";
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
+            this.label1.Size = new System.Drawing.Size(48, 13);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Medida :";
             // 
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Image = global::NeptunoSql.Windows.Properties.Resources.Cancelar;
-            this.btnCancelar.Location = new System.Drawing.Point(366, 125);
+            this.btnCancelar.Location = new System.Drawing.Point(367, 140);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(101, 51);
-            this.btnCancelar.TabIndex = 9;
+            this.btnCancelar.TabIndex = 3;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -74,27 +72,51 @@
             // btnGuardar
             // 
             this.btnGuardar.Image = global::NeptunoSql.Windows.Properties.Resources.Aceptar;
-            this.btnGuardar.Location = new System.Drawing.Point(56, 125);
+            this.btnGuardar.Location = new System.Drawing.Point(57, 140);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(101, 51);
-            this.btnGuardar.TabIndex = 10;
+            this.btnGuardar.TabIndex = 2;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // FrmMarcasAE
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(35, 76);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Abreviatura :";
+            // 
+            // txtAbreviatura
+            // 
+            this.txtAbreviatura.Location = new System.Drawing.Point(114, 73);
+            this.txtAbreviatura.MaxLength = 4;
+            this.txtAbreviatura.Name = "txtAbreviatura";
+            this.txtAbreviatura.Size = new System.Drawing.Size(354, 20);
+            this.txtAbreviatura.TabIndex = 1;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // FrmMedidasAE
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(535, 215);
+            this.ClientSize = new System.Drawing.Size(522, 250);
             this.ControlBox = false;
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.TextBoxMarca);
+            this.Controls.Add(this.txtAbreviatura);
+            this.Controls.Add(this.txtMedida);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "FrmMarcasAE";
-            this.Text = "FrmMarcasAE";
+            this.Name = "FrmMedidasAE";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "FrmMedidasAE";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -105,8 +127,10 @@
 
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.TextBox TextBoxMarca;
+        private System.Windows.Forms.TextBox txtMedida;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtAbreviatura;
         private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

@@ -116,9 +116,16 @@ namespace NeptunoSql.Windows
                 {
                     try
                     {
-                        _servicio.Borrar(marca.MarcaId);
-                        DataGridViewDatos.Rows.Remove(r);
-                        Helper.MensajeBox("Registro borrado", Tipo.Success);
+                        if (!_servicio.EstaRelacionado(marca))
+                        {
+                            _servicio.Borrar(marca.MarcaId);
+                            DataGridViewDatos.Rows.Remove(r);
+                            Helper.MensajeBox("Registro borrado", Tipo.Success);
+                        }
+                        else
+                        {
+                            Helper.MensajeBox("Baja denegada,registro relacionado", Tipo.Error);
+                        }
                     }
                     catch (Exception exception)
                     {

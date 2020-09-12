@@ -30,6 +30,7 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.medidasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.marcasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.categoríasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +60,7 @@
             // archivosToolStripMenuItem
             // 
             this.archivosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.medidasToolStripMenuItem,
             this.marcasToolStripMenuItem,
             this.categoríasToolStripMenuItem,
             this.productosToolStripMenuItem,
@@ -70,6 +72,13 @@
             this.archivosToolStripMenuItem.Name = "archivosToolStripMenuItem";
             this.archivosToolStripMenuItem.Size = new System.Drawing.Size(82, 24);
             this.archivosToolStripMenuItem.Text = "Archivos";
+            // 
+            // medidasToolStripMenuItem
+            // 
+            this.medidasToolStripMenuItem.Name = "medidasToolStripMenuItem";
+            this.medidasToolStripMenuItem.Size = new System.Drawing.Size(203, 24);
+            this.medidasToolStripMenuItem.Text = "Medidas";
+            this.medidasToolStripMenuItem.Click += new System.EventHandler(this.medidasToolStripMenuItem_Click);
             // 
             // marcasToolStripMenuItem
             // 
@@ -90,6 +99,7 @@
             this.productosToolStripMenuItem.Name = "productosToolStripMenuItem";
             this.productosToolStripMenuItem.Size = new System.Drawing.Size(203, 24);
             this.productosToolStripMenuItem.Text = "Productos";
+            this.productosToolStripMenuItem.Click += new System.EventHandler(this.productosToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -163,6 +173,7 @@
         private System.Windows.Forms.ToolStripMenuItem ventasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem devolucionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem medidasToolStripMenuItem;
     }
 }
 

@@ -107,7 +107,7 @@ namespace NeptunoSql.DataLayer.Repositorios
                 string cadenaDeComando = "SELECT CategoriaId,NombreCategoria,Descripcion FROM Categorias";
                 SqlCommand comando = new SqlCommand(cadenaDeComando,conexion);
                 SqlDataReader reader = comando.ExecuteReader();
-                if (reader.Read())
+                while (reader.Read())
                 {
                     Categoria categoria =ConstruirCategoria(reader);
                     lista.Add(categoria);
@@ -125,9 +125,9 @@ namespace NeptunoSql.DataLayer.Repositorios
         {
             return new Categoria()
             {
-                CategoriaId=reader.GetInt32(0),
-                NombreCategoria=reader.GetString(1),
-                Descripcion=reader.GetString(2)
+                CategoriaId = reader.GetInt32(0),
+                NombreCategoria = reader.GetString(1),
+                Descripcion = reader[2] != DBNull.Value ? reader.GetString(2) : null,
             };
         }
 

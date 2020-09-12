@@ -57,7 +57,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 62);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(723, 405);
+            this.panel1.Size = new System.Drawing.Size(723, 428);
             this.panel1.TabIndex = 5;
             // 
             // DataGridViewDatos
@@ -97,7 +97,7 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             this.DataGridViewDatos.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.DataGridViewDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGridViewDatos.Size = new System.Drawing.Size(723, 405);
+            this.DataGridViewDatos.Size = new System.Drawing.Size(723, 428);
             this.DataGridViewDatos.TabIndex = 0;
             // 
             // cmnMarca
@@ -219,7 +219,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 467);
+            this.ClientSize = new System.Drawing.Size(723, 490);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);

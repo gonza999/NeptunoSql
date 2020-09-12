@@ -19,7 +19,7 @@ namespace NeptunoSql.Windows
         private IServicioCategorias servicio;
         private void MostrarEnGrilla()
         {
-            DataGridViewDatos.Rows.Clear();
+            dgvDatos.Rows.Clear();
             foreach (var categoria in lista)
             {
                 DataGridViewRow r = ConstruirFila();
@@ -30,7 +30,7 @@ namespace NeptunoSql.Windows
 
         private void AgregarFila(DataGridViewRow r)
         {
-            DataGridViewDatos.Rows.Add(r);
+            dgvDatos.Rows.Add(r);
         }
 
         private void SetearFila(DataGridViewRow r, Categoria Categoria)
@@ -43,7 +43,7 @@ namespace NeptunoSql.Windows
         private DataGridViewRow ConstruirFila()
         {
             DataGridViewRow r = new DataGridViewRow();
-            r.CreateCells(DataGridViewDatos);
+            r.CreateCells(dgvDatos);
             return r;
         }
 
@@ -69,7 +69,9 @@ namespace NeptunoSql.Windows
 
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-
+            FrmCategoriasAE frm = new FrmCategoriasAE(this);
+            frm.Text = "Agregar";
+            frm.ShowDialog(this);
         }
     }
 }
