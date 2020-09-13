@@ -1,6 +1,8 @@
-﻿namespace NeptunoSql.BusinessLayer.Entities
+﻿using System;
+
+namespace NeptunoSql.BusinessLayer.Entities
 {
-    public class Producto
+    public class Producto : ICloneable
     {
         public int ProductoId { get; set; }
 
@@ -22,6 +24,9 @@
 
         public bool Suspendido { get; set; }
 
-
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

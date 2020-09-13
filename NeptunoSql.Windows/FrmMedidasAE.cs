@@ -21,14 +21,14 @@ namespace NeptunoSql.Windows
         {
             base.OnLoad(e);
             servicio = new ServicioMedidas();
-            if (medida!=null)
+            if (medida != null)
             {
                 txtMedida.Text = medida.Denominacion;
                 txtAbreviatura.Text = medida.Abreviatura;
                 esEdicion = true;
             }
         }
-        private bool esEdicion=false;
+        private bool esEdicion = false;
         private FrmMedidas frm;
         public FrmMedidasAE(FrmMedidas frmMedidas)
         {
@@ -46,44 +46,38 @@ namespace NeptunoSql.Windows
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            DialogResult=DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (ValidarDatos())
             {
-                if (medida==null)
+                if (medida == null)
                 {
                     medida = new Medida();
                 }
                 medida.Denominacion = txtMedida.Text;
                 medida.Abreviatura = txtAbreviatura.Text.ToUpper();
-                
+
                 if (ValidarObjeto())
                 {
                     if (!esEdicion)
                     {
-                        try
+                        servicio.Guardar(medida);
+                        frm.AgregarFila(medida);
+                        Helper.MensajeBox("Registro guardado", Tipo.Success);
+                        DialogResult dr = MessageBox.Show("Desea agregar otro registro?", "Confirmar",
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dr == DialogResult.No)
                         {
-                            servicio.Guardar(medida);
-                            frm.AgregarFila(medida);
-                            Helper.MensajeBox("Registro guardado", Tipo.Success);
-                            DialogResult dr = MessageBox.Show("Desea agregar otro registro?", "Confirmar",
-                                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (dr == DialogResult.No)
-                            {
-                                DialogResult = DialogResult.Cancel;
-                            }
-                            else
-                            {
-                                InicializarControles();
-                            }
+                            DialogResult = DialogResult.Cancel;
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            Helper.MensajeBox(ex.Message, Tipo.Error);
+                            InicializarControles();
                         }
+
                     }
                     else
                     {
@@ -109,7 +103,7 @@ namespace NeptunoSql.Windows
             if (servicio.Existe(medida))
             {
                 valido = false;
-                errorProvider1.SetError(txtMedida,"Medida o abreviatura repetida");
+                errorProvider1.SetError(txtMedida, "Medida o abreviatura repetida");
             }
             return valido;
         }
@@ -122,7 +116,7 @@ namespace NeptunoSql.Windows
                 string.IsNullOrWhiteSpace(txtMedida.Text))
             {
                 valido = false;
-                errorProvider1.SetError(txtMedida,"Debe ingresar una medida");
+                errorProvider1.SetError(txtMedida, "Debe ingresar una medida");
             }
             if (string.IsNullOrEmpty(txtAbreviatura.Text) ||
                 string.IsNullOrWhiteSpace(txtAbreviatura.Text))

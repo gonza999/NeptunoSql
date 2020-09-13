@@ -22,10 +22,15 @@ namespace NeptunoSql.Windows
             dgvDatos.Rows.Clear();
             foreach (var categoria in lista)
             {
-                DataGridViewRow r = ConstruirFila();
-                SetearFila(r, categoria);
-                AgregarFila(r);
+                AgregarFila(categoria);
             }
+        }
+
+        public void AgregarFila(Categoria categoria)
+        {
+            DataGridViewRow r = ConstruirFila();
+            SetearFila(r, categoria);
+            AgregarFila(r);
         }
 
         private void AgregarFila(DataGridViewRow r)
@@ -49,6 +54,11 @@ namespace NeptunoSql.Windows
 
         private void FrmCategorias_Load(object sender, System.EventArgs e)
         {
+            Actualizar();
+        }
+
+        private void Actualizar()
+        {
             try
             {
                 servicio = new ServicioCategorias();
@@ -58,7 +68,7 @@ namespace NeptunoSql.Windows
             catch (Exception ex)
             {
 
-                Helper.MensajeBox(ex.Message,Tipo.Error);
+                Helper.MensajeBox(ex.Message, Tipo.Error);
             }
         }
 
@@ -72,6 +82,71 @@ namespace NeptunoSql.Windows
             FrmCategoriasAE frm = new FrmCategoriasAE(this);
             frm.Text = "Agregar";
             frm.ShowDialog(this);
+        }
+
+        private void tsbBorrar_Click(object sender, EventArgs e)
+        {
+            if (dgvDatos.SelectedRows.Count > 0)
+            {
+                DataGridViewRow r = dgvDatos.SelectedRows[0];
+                Categoria categoria = (Categoria)r.Tag;
+
+                DialogResult dr = MessageBox.Show(this, $"¿Desea dar de baja a la categoria {categoria.NombreCategoria}?",
+                    "Confirmar Baja",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    try
+                    {
+                        if (!servicio.EstaRelacionado(categoria))
+                        {
+                            servicio.Borrar(categoria.CategoriaId);
+                            dgvDatos.Rows.Remove(r);
+                            Helper.MensajeBox("Registro borrado", Tipo.Success);
+                        }
+                        else
+                        {
+                            Helper.MensajeBox("Baja denegada,registro relacionado", Tipo.Error);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        Helper.MensajeBox(exception.Message, Tipo.Error);
+
+                    }
+                }
+            }
+        }
+
+        private void tsbEditar_Click(object sender, EventArgs e)
+        {
+            if (dgvDatos.SelectedRows.Count > 0)
+            {
+                DataGridViewRow r = dgvDatos.SelectedRows[0];
+                Categoria categoria = (Categoria)r.Tag;
+                Categoria categoriaClon = (Categoria)categoria.Clone();
+                FrmCategoriasAE frm = new FrmCategoriasAE(this);
+                frm.Text = "Editar Marca";
+                frm.SetCategoria(categoria);
+                DialogResult dr = frm.ShowDialog(this);
+                if (dr == DialogResult.OK)
+                {
+                    try
+                    {
+                        categoria = frm.GetCategoria();
+                        servicio.Guardar(categoria);
+                        SetearFila(r, categoria);
+                        Helper.MensajeBox("Registro Agregado", Tipo.Success);
+                    }
+                    catch (Exception exception)
+                    {
+                        Helper.MensajeBox(exception.Message, Tipo.Error);
+                    }
+                }
+
+
+            }
         }
     }
 }

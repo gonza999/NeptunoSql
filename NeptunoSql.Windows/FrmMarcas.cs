@@ -24,10 +24,15 @@ namespace NeptunoSql.Windows
             DataGridViewDatos.Rows.Clear();
             foreach (var marca in lista)
             {
-                DataGridViewRow r = ConstruirFila();
-                SetearFila(r, marca);
-                AgregarFila(r);
+                AgregarFila(marca);
             }
+        }
+
+        public void AgregarFila(Marca marca)
+        {
+            DataGridViewRow r = ConstruirFila();
+            SetearFila(r, marca);
+            AgregarFila(r);
         }
 
         private void AgregarFila(DataGridViewRow r)
@@ -56,6 +61,11 @@ namespace NeptunoSql.Windows
 
         private void FrmMarcas_Load(object sender, System.EventArgs e)
         {
+            Actualizar();
+        }
+
+        private void Actualizar()
+        {
             try
             {
                 _servicio = new ServicioMarcas();
@@ -71,34 +81,9 @@ namespace NeptunoSql.Windows
 
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            FrmMarcasAE frm = new FrmMarcasAE();
+            FrmMarcasAE frm = new FrmMarcasAE(this);
             frm.Text = "Nueva Marca";
-            DialogResult dr = frm.ShowDialog(this);
-            if (dr == DialogResult.OK)
-            {
-                try
-                {
-                    Marca marca = frm.GetMarca();
-                    if (!_servicio.Existe(marca))
-                    {
-                        _servicio.Guardar(marca);
-                        DataGridViewRow r = ConstruirFila();
-                        SetearFila(r, marca);
-                        AgregarFila(r);
-                        Helper.MensajeBox("Registro Agregado", Tipo.Success);
-
-                    }
-                    else
-                    {
-                        Helper.MensajeBox("Marca repetida", Tipo.Error);
-                    }
-                }
-                catch (Exception exception)
-                {
-                    Helper.MensajeBox(exception.Message, Tipo.Error);
-                }
-            }
-
+            frm.ShowDialog(this);
         }
 
         private void tsbBorrar_Click(object sender, EventArgs e)
@@ -137,14 +122,14 @@ namespace NeptunoSql.Windows
         }
 
 
-    private void tsbEditar_Click(object sender, EventArgs e)
+        private void tsbEditar_Click(object sender, EventArgs e)
         {
             if (DataGridViewDatos.SelectedRows.Count > 0)
             {
                 DataGridViewRow r = DataGridViewDatos.SelectedRows[0];
-                Marca marca = (Marca) r.Tag;
-                //MarcaDto marcaAux =(Marca) marca.Clone();
-                FrmMarcasAE frm = new FrmMarcasAE();
+                Marca marca = (Marca)r.Tag;
+                Marca marcaAux = (Marca)marca.Clone();
+                FrmMarcasAE frm = new FrmMarcasAE(this);
                 frm.Text = "Editar Marca";
                 frm.SetMarca(marca);
                 DialogResult dr = frm.ShowDialog(this);
@@ -153,16 +138,9 @@ namespace NeptunoSql.Windows
                     try
                     {
                         marca = frm.GetMarca();
-                        if (!_servicio.Existe(marca))
-                        {
-                            _servicio.Guardar(marca);
-                            SetearFila(r, marca);
-                            Helper.MensajeBox("Registro Agregado", Tipo.Success);
-                        }
-                        else
-                        {
-                            Helper.MensajeBox("Marca Repetida", Tipo.Error);
-                        }
+                        _servicio.Guardar(marca);
+                        SetearFila(r, marca);
+                        Helper.MensajeBox("Registro Agregado", Tipo.Success);
                     }
                     catch (Exception exception)
                     {
