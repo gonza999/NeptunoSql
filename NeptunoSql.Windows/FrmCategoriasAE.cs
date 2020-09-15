@@ -24,11 +24,18 @@ namespace NeptunoSql.Windows
             InitializeComponent();
             this.frmCategorias = frmCategorias;
         }
+
+        public FrmCategoriasAE()
+        {
+            InitializeComponent();
+            frmCategorias = null;
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
             servicio = new ServicioCategorias();
-            if (categoria!=null)
+            if (categoria != null)
             {
                 txtCategoria.Text = categoria.NombreCategoria;
                 txtDescripcion.Text = categoria.Descripcion;
@@ -47,7 +54,7 @@ namespace NeptunoSql.Windows
         {
             if (ValidarDatos())
             {
-                if (categoria==null)
+                if (categoria == null)
                 {
                     categoria = new Categoria();
                 }
@@ -58,7 +65,11 @@ namespace NeptunoSql.Windows
                     try
                     {
                         servicio.Guardar(categoria);
-                        frmCategorias.AgregarFila(categoria);
+                        if (frmCategorias != null)
+                        {
+                            frmCategorias.AgregarFila(categoria);
+
+                        }
                         Helper.MensajeBox("Registro guardado", Tipo.Success);
                         DialogResult dr = MessageBox.Show("Desea agregar otro registro?", "Confirmar",
                             MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -73,7 +84,7 @@ namespace NeptunoSql.Windows
                     }
                     catch (Exception ex)
                     {
-                        Helper.MensajeBox(ex.Message,Tipo.Error);
+                        Helper.MensajeBox(ex.Message, Tipo.Error);
                     }
                 }
                 else
@@ -99,7 +110,7 @@ namespace NeptunoSql.Windows
                 string.IsNullOrWhiteSpace(txtCategoria.Text))
             {
                 valido = false;
-                errorProvider1.SetError(txtCategoria,"Debe ingresar una categoria");
+                errorProvider1.SetError(txtCategoria, "Debe ingresar una categoria");
             }
             if (string.IsNullOrEmpty(txtDescripcion.Text) ||
                 string.IsNullOrWhiteSpace(txtDescripcion.Text))

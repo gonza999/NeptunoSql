@@ -36,6 +36,12 @@ namespace NeptunoSql.Windows
             frm = frmMedidas;
         }
 
+        public FrmMedidasAE()
+        {
+            InitializeComponent();
+            frm = null;
+        }
+
         private Medida medida;
         private IServicioMedidas servicio;
 
@@ -65,7 +71,10 @@ namespace NeptunoSql.Windows
                     if (!esEdicion)
                     {
                         servicio.Guardar(medida);
-                        frm.AgregarFila(medida);
+                        if (frm != null)
+                        {
+                            frm.AgregarFila(medida);
+                        }
                         Helper.MensajeBox("Registro guardado", Tipo.Success);
                         DialogResult dr = MessageBox.Show("Desea agregar otro registro?", "Confirmar",
                             MessageBoxButtons.YesNo, MessageBoxIcon.Question);

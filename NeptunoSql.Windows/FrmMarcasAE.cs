@@ -10,11 +10,18 @@ namespace NeptunoSql.Windows
 {
     public partial class FrmMarcasAE : Form
     {
-        public FrmMarcasAE(FrmMarcas frm )
+        public FrmMarcasAE(FrmMarcas frm)
         {
             InitializeComponent();
             this.frm = frm;
         }
+
+        public FrmMarcasAE()
+        {
+            InitializeComponent();
+            frm = null;
+        }
+
         private FrmMarcas frm;
         private bool esEdicion = false;
         protected override void OnLoad(EventArgs e)
@@ -64,19 +71,22 @@ namespace NeptunoSql.Windows
                 {
                     marca = new Marca();
                 }
-                
+
                 marca.NombreMarca = TextBoxMarca.Text;
-                
+
                 if (ValidarObjeto())
                 {
                     if (!esEdicion)
                     {
                         servicio.Guardar(marca);
-                        frm.AgregarFila(marca);
+                        if (frm != null)
+                        {
+                            frm.AgregarFila(marca);
+                        }
                         Helper.MensajeBox("Registro guardado", Tipo.Success);
                         DialogResult dr = MessageBox.Show("Desea agregar otro registro?", "Confirmar",
                             MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (dr==DialogResult.No)
+                        if (dr == DialogResult.No)
                         {
                             DialogResult = DialogResult.Cancel;
                         }
@@ -109,7 +119,7 @@ namespace NeptunoSql.Windows
             bool valido = true;
             if (servicio.Existe(marca))
             {
-                errorProvider1.SetError(TextBoxMarca,"Marca repetida");
+                errorProvider1.SetError(TextBoxMarca, "Marca repetida");
                 valido = false;
             }
             return valido;

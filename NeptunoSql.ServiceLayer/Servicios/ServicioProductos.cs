@@ -1,4 +1,7 @@
 ﻿using NeptunoSql.BusinessLayer.Entities;
+using NeptunoSql.DataLayer;
+using NeptunoSql.DataLayer.Repositorios;
+using NeptunoSql.DataLayer.Repositorios.Facades;
 using NeptunoSql.ServiceLayer.Servicios.Facades;
 using System;
 using System.Collections.Generic;
@@ -7,6 +10,15 @@ namespace NeptunoSql.ServiceLayer.Servicios
 {
     public class ServicioProductos : IServicioProductos
     {
+        private IRepositorioProductos repositorio;
+        private ConexionBd conexion;
+        private IRepositorioMarcas repositorioMarcas;
+        private IRepositorioCategorias repositorioCategorias;
+        private IRepositorioMedidas repositorioMedidas;
+        public ServicioProductos()
+        {
+
+        }
         public void Borrar(int id)
         {
             throw new NotImplementedException();
@@ -24,7 +36,22 @@ namespace NeptunoSql.ServiceLayer.Servicios
 
         public List<Producto> GetLista()
         {
-            throw new NotImplementedException();
+            try
+            {
+                conexion = new ConexionBd();
+                repositorioMarcas=new RepositorioMarcas(conexion.AbrirConexion());
+                repositorioCategorias=new RepositorioCategorias(conexion.AbrirConexion());
+                repositorioMedidas=new RepositorioMedidas(conexion.AbrirConexion());
+                repositorio = new RepositorioProductos(conexion.AbrirConexion(),repositorioMarcas,repositorioCategorias,repositorioMedidas);
+                var lista = repositorio.GetLista();
+                conexion.CerrarConexion();
+                return lista;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
         }
 
         public Producto GetProductoPorId(int id)

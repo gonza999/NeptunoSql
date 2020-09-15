@@ -94,6 +94,12 @@
     <Compile Include="FrmProductos.Designer.cs">
       <DependentUpon>FrmProductos.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmProductosAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmProductosAE.Designer.cs">
+      <DependentUpon>FrmProductosAE.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Enum\Tipo.cs" />
     <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Program.cs" />
@@ -121,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmProductos.resx">
       <DependentUpon>FrmProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmProductosAE.resx">
+      <DependentUpon>FrmProductosAE.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -184,6 +193,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Neptuno-su-reino-su-mito-y-mucho-mas-1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus_20px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search_40px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
