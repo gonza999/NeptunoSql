@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbCategoria = new System.Windows.Forms.ComboBox();
@@ -41,13 +42,16 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cmbMedida = new System.Windows.Forms.ComboBox();
             this.ckbSuspendido = new System.Windows.Forms.CheckBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.btnMedida = new System.Windows.Forms.Button();
             this.btnMarca = new System.Windows.Forms.Button();
             this.btnCategoria = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.pbxProducto = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxProducto)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -98,6 +102,7 @@
             // txtDescripcion
             // 
             this.txtDescripcion.Location = new System.Drawing.Point(84, 102);
+            this.txtDescripcion.MaxLength = 150;
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(311, 107);
@@ -115,6 +120,7 @@
             // txtCodigoDeBarras
             // 
             this.txtCodigoDeBarras.Location = new System.Drawing.Point(120, 226);
+            this.txtCodigoDeBarras.MaxLength = 20;
             this.txtCodigoDeBarras.Name = "txtCodigoDeBarras";
             this.txtCodigoDeBarras.Size = new System.Drawing.Size(235, 20);
             this.txtCodigoDeBarras.TabIndex = 19;
@@ -163,14 +169,6 @@
             this.ckbSuspendido.Text = "Suspendido";
             this.ckbSuspendido.UseVisualStyleBackColor = true;
             // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(436, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(250, 250);
-            this.panel1.TabIndex = 21;
-            // 
             // button1
             // 
             this.button1.Image = global::NeptunoSql.Windows.Properties.Resources.search_40px;
@@ -181,6 +179,7 @@
             this.button1.Text = "Buscar imagen";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnMedida
             // 
@@ -241,6 +240,20 @@
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // pbxProducto
+            // 
+            this.pbxProducto.Location = new System.Drawing.Point(449, 15);
+            this.pbxProducto.Name = "pbxProducto";
+            this.pbxProducto.Size = new System.Drawing.Size(225, 244);
+            this.pbxProducto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxProducto.TabIndex = 25;
+            this.pbxProducto.TabStop = false;
             // 
             // FrmProductosAE
             // 
@@ -248,10 +261,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(707, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.pbxProducto);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.ckbSuspendido);
             this.Controls.Add(this.txtPrecioDeVenta);
             this.Controls.Add(this.txtCodigoDeBarras);
@@ -271,6 +284,8 @@
             this.Name = "FrmProductosAE";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmProductosAE";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxProducto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -294,9 +309,10 @@
         private System.Windows.Forms.ComboBox cmbMedida;
         private System.Windows.Forms.Button btnMedida;
         private System.Windows.Forms.CheckBox ckbSuspendido;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.PictureBox pbxProducto;
     }
 }

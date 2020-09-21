@@ -114,7 +114,27 @@ namespace NeptunoSql.DataLayer.Repositorios
 
         public Medida GetMedidaPorId(int id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                Medida medida = null;
+                string cadenaComando = "SELECT MedidaId, Denominacion,Abreviatura FROM Medidas WHERE MedidaId=@id";
+                SqlCommand comando = new SqlCommand(cadenaComando, conexion);
+                comando.Parameters.AddWithValue("@id", id);
+                SqlDataReader reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    medida = ConstruirMedida(reader);
+                    reader.Close();
+                }
+
+                return medida;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
         }
 
         public void Guardar(Medida medida)

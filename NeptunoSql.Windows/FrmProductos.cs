@@ -92,5 +92,35 @@ namespace NeptunoSql.Windows
             frm.Text = "Agregar Producto";
             frm.ShowDialog(this);
         }
+
+        private void tsbEditar_Click(object sender, EventArgs e)
+        {
+            if (DgvDatos.SelectedRows.Count>0)
+            {
+                var r = DgvDatos.SelectedRows[0];
+                Producto producto =(Producto) r.Tag;
+                producto = servicio.GetProductoPorId(producto.ProductoId);
+                FrmProductosAE frm = new FrmProductosAE();
+                frm.Text = "Editar Producto";
+                frm.SetProducto(producto);
+                DialogResult dr = frm.ShowDialog(this);
+                if (dr==DialogResult.OK)
+                {
+                    try
+                    {
+                        producto = frm.GetProducto();
+                        servicio.Guardar(producto);
+                        SetearFila(r, producto);
+                        Helper.MensajeBox("Producto editado con exito", Tipo.Success);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Helper.MensajeBox(ex.Message, Tipo.Error);
+
+                    }
+                }
+            }
+        }
     }
 }

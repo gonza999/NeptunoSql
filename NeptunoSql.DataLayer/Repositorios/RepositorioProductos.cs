@@ -21,6 +21,12 @@ namespace NeptunoSql.DataLayer.Repositorios
             this.repositorioMarcas = repositorioMarcas;
             this.repositorioMedidas = repositorioMedidas;
         }
+
+        public RepositorioProductos(SqlConnection sqlConnection)
+        {
+            this.conexion = sqlConnection;
+        }
+
         public void Borrar(int id)
         {
             throw new System.NotImplementedException();
@@ -77,12 +83,75 @@ namespace NeptunoSql.DataLayer.Repositorios
 
         public Producto GetProductoPorId(int id)
         {
-            throw new System.NotImplementedException();
+            Producto producto = null;
+            try
+            {
+                var cadenaDeComando = "SELECT ProductoId,Descripcion,MarcaId,CategoriaId," +
+                    "PrecioUnitario,Stock,CodigoBarra,MedidaId,Imagen,Suspendido FROM " +
+                    " Productos WHERE ProductoId=@id";
+                var comando = new SqlCommand(cadenaDeComando,conexion);
+                comando.Parameters.AddWithValue("@id",id);
+                var reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    producto = ConstruirProductoTotal(reader);
+                    reader.Close();
+                }
+                return producto;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
+        private Producto ConstruirProductoTotal(SqlDataReader reader)
+        {
+            return new Producto()
+            {
+                ProductoId = reader.GetInt32(0),
+                Descripcion = reader.GetString(1),
+                Marca = repositorioMarcas.GetMarcaPorId(reader.GetInt32(2)),
+                Categoria = repositorioCategorias.GetCategoriaPorId(reader.GetInt32(3)),
+                PrecioUnitario = reader.GetDecimal(4),
+                Stock = reader.GetDecimal(5),
+                CodigoBarra =reader[6]!=DBNull.Value? reader.GetString(6):null,
+                Medida = repositorioMedidas.GetMedidaPorId(reader.GetInt32(7)),
+                Imagen=reader[8]!=DBNull.Value?reader.GetString(8):null,
+                Suspendido = reader.GetBoolean(9)
+
+            };
         }
 
         public void Guardar(Producto producto)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var cadenaDeComando = "INSERT INTO Productos (Descripcion,MarcaId,CategoriaId,PrecioUnitario," +
+                    "CodigoBarra,MedidaId,Imagen,Suspendido) VALUES (@descripcion,@marcaId,@categoriaId,@precio," +
+                    "@codigo,@medidaId,@imagen,@suspendido)";
+                var comando = new SqlCommand(cadenaDeComando, conexion);
+                comando.Parameters.AddWithValue("@descripcion",producto.Descripcion);
+                comando.Parameters.AddWithValue("@marcaId",producto.Marca.MarcaId);
+                comando.Parameters.AddWithValue("@categoriaId",producto.Categoria.CategoriaId);
+                comando.Parameters.AddWithValue("@precio",producto.PrecioUnitario);
+                comando.Parameters.AddWithValue("@codigo",producto.CodigoBarra);
+                comando.Parameters.AddWithValue("@medidaId",producto.Medida.MedidaId);
+                comando.Parameters.AddWithValue("@imagen",producto.Imagen);
+                comando.Parameters.AddWithValue("@suspendido",producto.Suspendido);
+                comando.ExecuteNonQuery();
+                cadenaDeComando = "SELECT @@Identity";
+                comando = new SqlCommand(cadenaDeComando,conexion);
+                producto.ProductoId = (int)(decimal)comando.ExecuteScalar();
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
         }
     }
 }
