@@ -47,6 +47,7 @@
     <Compile Include="Servicios\Facades\IServicioMedidas.cs" />
     <Compile Include="Servicios\Facades\IServicioProductos.cs" />
     <Compile Include="Servicios\ServicioCategorias.cs" />
+    <Compile Include="Servicios\ServicioIngresos.cs" />
     <Compile Include="Servicios\ServicioMarcas.cs" />
     <Compile Include="Servicios\ServicioMedidas.cs" />
     <Compile Include="Servicios\ServicioProductos.cs" />

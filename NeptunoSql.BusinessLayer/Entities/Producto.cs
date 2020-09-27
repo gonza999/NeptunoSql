@@ -28,5 +28,10 @@ namespace NeptunoSql.BusinessLayer.Entities
         {
             return this.MemberwiseClone();
         }
+
+        public override string ToString()
+        {
+            return $"{Marca.NombreMarca} {Descripcion}";
+        }
     }
 }

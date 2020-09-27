@@ -45,10 +45,14 @@
     <Compile Include="ConexionBd.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\Facades\IRepositorioCategorias.cs" />
+    <Compile Include="Repositorios\Facades\IRepositorioDetallesIngresos.cs" />
+    <Compile Include="Repositorios\Facades\IRepositorioIngresos.cs" />
     <Compile Include="Repositorios\Facades\IRepositorioMarcas.cs" />
     <Compile Include="Repositorios\Facades\IRepositorioMedidas.cs" />
     <Compile Include="Repositorios\Facades\IRepositorioProductos.cs" />
     <Compile Include="Repositorios\RepositorioCategorias.cs" />
+    <Compile Include="Repositorios\RepositorioDetallesIngresos.cs" />
+    <Compile Include="Repositorios\RepositorioIngresos.cs" />
     <Compile Include="Repositorios\RepositorioMarcas.cs" />
     <Compile Include="Repositorios\RepositorioMedidas.cs" />
     <Compile Include="Repositorios\RepositorioProductos.cs" />

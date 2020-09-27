@@ -73,5 +73,12 @@ namespace NeptunoSql.Windows.Helpers
             cmbMarca.ValueMember = "MarcaId";
             cmbMarca.SelectedIndex = 0;
         }
+
+        public static DataGridViewRow ConstruirFila(ref DataGridView dgv)
+        {
+            var r = new DataGridViewRow();
+            r.CreateCells(dgv);
+            return r;
+        }
     }
 }
