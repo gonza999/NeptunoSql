@@ -12,7 +12,6 @@ namespace NeptunoSql.BusinessLayer.Entities
         public string Referencia { get; set; }
         public string Empleado { get; set; }
         public DateTime Fecha { get; set; }
-
         public List<DetalleIngreso> DetalleIngresos { get; set; }
     }
 }
