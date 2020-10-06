@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace NeptunoSql.DataLayer.Repositorios.Facades
 {
-    public interface IRepositorioIngresos
+    public interface IRepositorioKardex
     {
-        void Guardar(Ingreso ingreso);
+        void Guardar(Kardex kardex);
+        Kardex GetUltimoKardex(Producto producto);
     }
 }

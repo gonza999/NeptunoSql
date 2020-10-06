@@ -470,6 +470,7 @@
             this.Name = "FrmIngresos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmIngresos";
+            this.Load += new System.EventHandler(this.FrmIngresos_Load);
             this.tabStock.ResumeLayout(false);
             this.tabIngresos.ResumeLayout(false);
             this.tabIngresos.PerformLayout();

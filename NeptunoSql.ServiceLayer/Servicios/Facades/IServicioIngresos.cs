@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NeptunoSql.DataLayer.Repositorios.Facades
+namespace NeptunoSql.ServiceLayer.Servicios.Facades
 {
-    public interface IRepositorioIngresos
+    public interface IServicioIngresos
     {
         void Guardar(Ingreso ingreso);
     }

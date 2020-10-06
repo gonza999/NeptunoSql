@@ -1,6 +1,9 @@
 ﻿using Microsoft.VisualBasic;
 using NeptunoSql.BusinessLayer.Entities;
+using NeptunoSql.ServiceLayer.Servicios;
+using NeptunoSql.ServiceLayer.Servicios.Facades;
 using NeptunoSql.Windows.Helpers;
+using NeptunoSql.Windows.Helpers.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -79,13 +82,55 @@ namespace NeptunoSql.Windows
                 default:break;
             }         
         }
-
+        private IServicioIngresos servicio;
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (ValidarDatos())
             {
+                Ingreso ingreso = new Ingreso();
+                ingreso.Referencia = txtReferencia.Text;
+                ingreso.Empleado = txtEmpleado.Text;
+                ingreso.Fecha = pickerFechaStock.Value;
+                ingreso.DetalleIngresos = ConstruirListaDetalleIngresos();
 
+                try
+                {
+                    servicio.Guardar(ingreso);
+                    Helper.MensajeBox("Registro guardado", Tipo.Success);
+                    InicializarControles();
+                }
+                catch (Exception ex)
+                {
+                    Helper.MensajeBox(ex.Message,Tipo.Error);
+                    
+                }
             }
+        }
+
+        private void InicializarControles()
+        {
+
+            txtReferencia.Clear();
+            txtEmpleado.Clear();
+            pickerFechaStock.Value = DateTime.Today;
+            dgvDatos.Rows.Clear();
+            txtReferencia.Clear();
+            lista.Clear();
+        }
+
+        private List<DetalleIngreso> ConstruirListaDetalleIngresos()
+        {
+            List<DetalleIngreso> listaDetalle = new List<DetalleIngreso>();
+            int contadorFilas = -1;
+            foreach (var p in lista)
+            {
+                contadorFilas++;
+                DetalleIngreso detalleIngreso = new DetalleIngreso();
+                detalleIngreso.Producto = p;
+                detalleIngreso.Cantidad =(decimal)(double) dgvDatos.Rows[contadorFilas].Cells[2].Value;
+                listaDetalle.Add(detalleIngreso);
+            }
+            return listaDetalle;
         }
 
         private bool ValidarDatos()
@@ -133,6 +178,11 @@ namespace NeptunoSql.Windows
 
             
             return valido;
+        }
+
+        private void FrmIngresos_Load(object sender, EventArgs e)
+        {
+            servicio = new ServicioIngresos();
         }
     }
 }

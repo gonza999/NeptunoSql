@@ -11,5 +11,6 @@ namespace NeptunoSql.DataLayer.Repositorios.Facades
         void Borrar(int id);
         bool Existe(Producto producto);
         bool EstaRelacionado(Producto producto);
+        void ActualizarStock(Producto producto, decimal cantidad);
     }
 }

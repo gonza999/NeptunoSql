@@ -12,6 +12,7 @@ namespace NeptunoSql.DataLayer.Repositorios
         private readonly IRepositorioMarcas repositorioMarcas;
         private readonly IRepositorioCategorias repositorioCategorias;
         private readonly IRepositorioMedidas repositorioMedidas;
+        private readonly SqlTransaction transaction;
 
         public RepositorioProductos(SqlConnection conexion, IRepositorioMarcas repositorioMarcas,
              IRepositorioCategorias repositorioCategorias, IRepositorioMedidas repositorioMedidas)
@@ -25,6 +26,12 @@ namespace NeptunoSql.DataLayer.Repositorios
         public RepositorioProductos(SqlConnection sqlConnection)
         {
             this.conexion = sqlConnection;
+        }
+
+        public RepositorioProductos(SqlConnection cn, SqlTransaction transaction)
+        {
+            conexion = cn;
+            this.transaction = transaction;
         }
 
         public void Borrar(int id)
@@ -151,6 +158,23 @@ namespace NeptunoSql.DataLayer.Repositorios
             {
 
                 throw new Exception(e.Message);
+            }
+        }
+
+        public void ActualizarStock(Producto producto, decimal cantidad)
+        {
+            try
+            {
+                string cadenaComando = "UPDATE Productos SET Stock=Stock+@cant WHERE ProductoId=@id";
+                var comando = new SqlCommand(cadenaComando,conexion,transaction);
+                comando.Parameters.AddWithValue("@cant",cantidad);
+                comando.Parameters.AddWithValue("@id",producto.ProductoId);
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message) ;
             }
         }
     }

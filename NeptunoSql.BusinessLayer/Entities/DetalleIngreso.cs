@@ -12,8 +12,9 @@ namespace NeptunoSql.BusinessLayer.Entities
 
         public Ingreso Ingreso { get; set; }
 
-        public Producto producto { get; set; }
-        public double Stock { get; set; }
+        public Producto Producto { get; set; }
+        public decimal Cantidad { get; set; }
 
+        public Kardex Kardex { get; set; }
     }
 }
