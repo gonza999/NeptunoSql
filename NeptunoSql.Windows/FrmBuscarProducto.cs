@@ -66,9 +66,15 @@ namespace NeptunoSql.Windows
             {
                 return;
             }
-            DataGridViewRow r = dgvDatos.Rows[e.RowIndex];
-            Producto p =(Producto) r.Tag;
-            frm.AgregarFila(p);
+
+            DialogResult dr = MessageBox.Show("Desea agregar el producto?","Agregar",
+                MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            if (dr==DialogResult.Yes)
+            {
+                DataGridViewRow r = dgvDatos.Rows[e.RowIndex];
+                Producto p = (Producto)r.Tag;
+                frm.AgregarFila(p); 
+            }
         }
     }
 }
