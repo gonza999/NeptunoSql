@@ -42,7 +42,7 @@ namespace NeptunoSql.Windows
                 lista.Add(producto);
                 var r = Helper.ConstruirFila(ref dgvDatos);
                 SetearFila(r, producto);
-                AgregarFila(r); 
+                AgregarFila(r);
             }
         }
 
@@ -63,24 +63,30 @@ namespace NeptunoSql.Windows
             switch (e.ColumnIndex)
             {
                 case 2:
-                    var cantidad=Interaction.InputBox("Ingrese la cantidad",
-                        "Ingreso de stock","0",Screen.PrimaryScreen.WorkingArea.Bottom/2, Screen.PrimaryScreen.WorkingArea.Height/2);
-                    if (!double.TryParse(cantidad,out double stock))
+                    var cantidad = Interaction.InputBox("Ingrese la cantidad",
+                        "Ingreso de stock", "0", Screen.PrimaryScreen.WorkingArea.Bottom / 2, Screen.PrimaryScreen.WorkingArea.Height / 2);
+                    if (!double.TryParse(cantidad, out double stock))
                     {
                         return;
                     }
-                    else if (stock<=0 || stock>=int.MaxValue)
+                    else if (stock <= 0 || stock >= int.MaxValue)
                     {
                         return;
                     }
-                    DataGridViewCell celda=dgvDatos.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    DataGridViewCell celda = dgvDatos.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     celda.Value = stock;
                     break;
                 case 3:
-                         dgvDatos.Rows.RemoveAt(e.RowIndex);
+                    DialogResult dr = MessageBox.Show("Desea borrar el producto de la lista " +
+                        "de ingresos?", "Borrar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dr == DialogResult.Yes)
+                    {
+                        dgvDatos.Rows.RemoveAt(e.RowIndex);
+
+                    }
                     break;
-                default:break;
-            }         
+                default: break;
+            }
         }
         private IServicioIngresos servicio;
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -101,8 +107,8 @@ namespace NeptunoSql.Windows
                 }
                 catch (Exception ex)
                 {
-                    Helper.MensajeBox(ex.Message,Tipo.Error);
-                    
+                    Helper.MensajeBox(ex.Message, Tipo.Error);
+
                 }
             }
         }
@@ -127,7 +133,7 @@ namespace NeptunoSql.Windows
                 contadorFilas++;
                 DetalleIngreso detalleIngreso = new DetalleIngreso();
                 detalleIngreso.Producto = p;
-                detalleIngreso.Cantidad =(decimal)(double) dgvDatos.Rows[contadorFilas].Cells[2].Value;
+                detalleIngreso.Cantidad = (decimal)(double)dgvDatos.Rows[contadorFilas].Cells[2].Value;
                 listaDetalle.Add(detalleIngreso);
             }
             return listaDetalle;
@@ -149,12 +155,12 @@ namespace NeptunoSql.Windows
                 valido = false;
                 errorProvider1.SetError(txtReferencia, "Debe ingresar una referencia");
             }
-            if (pickerFechaStock.Value.Date>=DateTime.Today)
+            if (pickerFechaStock.Value.Date >= DateTime.Today)
             {
                 valido = false;
                 errorProvider1.SetError(pickerFechaStock, "Fecha mal ingresada");
             }
-            if (dgvDatos.Rows.Count==0)
+            if (dgvDatos.Rows.Count == 0)
             {
                 valido = false;
                 errorProvider1.SetError(linkProductosStock, "Debe seleccionar al menos un producto");
@@ -164,7 +170,7 @@ namespace NeptunoSql.Windows
                 foreach (DataGridViewRow r in dgvDatos.Rows)
                 {
                     DataGridViewCell celda = r.Cells[2];
-                    if (celda.Value==null)
+                    if (celda.Value == null)
                     {
                         valido = false;
                         celda.Style.BackColor = Color.Red;
@@ -176,7 +182,7 @@ namespace NeptunoSql.Windows
                 }
             }
 
-            
+
             return valido;
         }
 
