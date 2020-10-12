@@ -11,5 +11,6 @@ namespace NeptunoSql.ServiceLayer.Servicios.Facades
         void Borrar(int id);
         bool Existe(Producto producto);
         bool EstaRelacionado(Producto producto);
+        Producto GetProductoPorCodigoDeBarras(string codigo);
     }
 }

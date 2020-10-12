@@ -177,5 +177,31 @@ namespace NeptunoSql.DataLayer.Repositorios
                 throw new Exception(e.Message) ;
             }
         }
+
+        public Producto GetProductoPorCodigoDeBarras(string codigo)
+        {
+            Producto producto = null;
+            try
+            {
+                var cadenaDeComando = "SELECT ProductoId,Descripcion,MarcaId,CategoriaId," +
+                    "PrecioUnitario,Stock,CodigoBarra,MedidaId,Imagen,Suspendido FROM " +
+                    " Productos WHERE CodigoBarra=@codigo";
+                var comando = new SqlCommand(cadenaDeComando, conexion);
+                comando.Parameters.AddWithValue("@codigo", codigo);
+                var reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    producto = ConstruirProductoTotal(reader);
+                    reader.Close();
+                }
+                return producto;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

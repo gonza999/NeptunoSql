@@ -52,5 +52,11 @@ namespace NeptunoSql.Windows
             FrmIngresos frm = new FrmIngresos();
             frm.ShowDialog(this);
         }
+
+        private void ventasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmVentas frm = new FrmVentas();
+            frm.ShowDialog(this);
+        }
     }
 }

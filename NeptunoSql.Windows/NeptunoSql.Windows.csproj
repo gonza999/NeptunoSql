@@ -53,6 +53,12 @@
     <Compile Include="FrmBuscarProducto.Designer.cs">
       <DependentUpon>FrmBuscarProducto.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmBuscarProductoVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBuscarProductoVenta.Designer.cs">
+      <DependentUpon>frmBuscarProductoVenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmCategorias.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,12 +119,21 @@
     <Compile Include="FrmProductosAE.Designer.cs">
       <DependentUpon>FrmProductosAE.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmVentas.Designer.cs">
+      <DependentUpon>FrmVentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Enum\Tipo.cs" />
     <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmBuscarProducto.resx">
       <DependentUpon>FrmBuscarProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBuscarProductoVenta.resx">
+      <DependentUpon>frmBuscarProductoVenta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCategorias.resx">
       <DependentUpon>FrmCategorias.cs</DependentUpon>
@@ -149,6 +164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmProductosAE.resx">
       <DependentUpon>FrmProductosAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmVentas.resx">
+      <DependentUpon>FrmVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -233,6 +251,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\delete_20px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buy_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\return_purchase_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_shopping_cart_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buying_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\get_a_discount_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\receive_cash_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_window_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_30px1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buying_15px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

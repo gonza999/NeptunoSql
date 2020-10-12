@@ -12,5 +12,6 @@ namespace NeptunoSql.DataLayer.Repositorios.Facades
         bool Existe(Producto producto);
         bool EstaRelacionado(Producto producto);
         void ActualizarStock(Producto producto, decimal cantidad);
+        Producto GetProductoPorCodigoDeBarras(string codigo);
     }
 }
