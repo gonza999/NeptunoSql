@@ -54,6 +54,66 @@ namespace NeptunoSql.ServiceLayer.Servicios
             }
         }
 
+        public List<Producto> GetLista(int marcaId)
+        {
+            try
+            {
+                conexion = new ConexionBd();
+                repositorioMarcas = new RepositorioMarcas(conexion.AbrirConexion());
+                repositorioCategorias = new RepositorioCategorias(conexion.AbrirConexion());
+                repositorioMedidas = new RepositorioMedidas(conexion.AbrirConexion());
+                repositorio = new RepositorioProductos(conexion.AbrirConexion(), repositorioMarcas, repositorioCategorias, repositorioMedidas);
+                var lista = repositorio.GetLista(marcaId);
+                conexion.CerrarConexion();
+                return lista;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
+        public List<Producto> GetLista(Categoria categoria)
+        {
+            try
+            {
+                conexion = new ConexionBd();
+                repositorioMarcas = new RepositorioMarcas(conexion.AbrirConexion());
+                repositorioCategorias = new RepositorioCategorias(conexion.AbrirConexion());
+                repositorioMedidas = new RepositorioMedidas(conexion.AbrirConexion());
+                repositorio = new RepositorioProductos(conexion.AbrirConexion(), repositorioMarcas, repositorioCategorias, repositorioMedidas);
+                var lista = repositorio.GetLista(categoria);
+                conexion.CerrarConexion();
+                return lista;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
+        public List<Producto> GetLista(string descripcion)
+        {
+            try
+            {
+                conexion = new ConexionBd();
+                repositorioMarcas = new RepositorioMarcas(conexion.AbrirConexion());
+                repositorioCategorias = new RepositorioCategorias(conexion.AbrirConexion());
+                repositorioMedidas = new RepositorioMedidas(conexion.AbrirConexion());
+                repositorio = new RepositorioProductos(conexion.AbrirConexion(), repositorioMarcas, repositorioCategorias, repositorioMedidas);
+                var lista = repositorio.GetLista(descripcion);
+                conexion.CerrarConexion();
+                return lista;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
         public Producto GetProductoPorCodigoDeBarras(string codigo)
         {
             try

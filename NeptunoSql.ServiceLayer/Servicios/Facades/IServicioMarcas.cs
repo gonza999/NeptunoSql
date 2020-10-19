@@ -11,6 +11,6 @@ namespace NeptunoSql.ServiceLayer.Servicios.Facades
         void Borrar(int id);
         bool Existe(Marca marca);
         bool EstaRelacionado(Marca marca);
-
+        Marca GetMarca(string nombreMarca);
     }
 }

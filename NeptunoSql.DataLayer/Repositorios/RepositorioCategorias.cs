@@ -170,5 +170,28 @@ namespace NeptunoSql.DataLayer.Repositorios
                 }
             }
         }
+
+        public Categoria GetCategoria(string nombreCategoria)
+        {
+            try
+            {
+                Categoria categoria = null;
+                string cadenaDeComando = "SELECT CategoriaId,NombreCategoria,Descripcion FROM Categorias WHERE NombreCategoria=@nombreCategoria";
+                SqlCommand comando = new SqlCommand(cadenaDeComando, conexion);
+                comando.Parameters.AddWithValue("@nombreCategoria", nombreCategoria);
+                SqlDataReader reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    categoria = ConstruirCategoria(reader);
+                    reader.Close();
+                }
+                return categoria;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

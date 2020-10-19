@@ -15,10 +15,10 @@ using System.Windows.Forms;
 
 namespace NeptunoSql.Windows
 {
-    public partial class frmBuscarProductoVenta : Form
+    public partial class FrmBuscarProductoVenta : Form
     {
         private FrmVentas frm;
-        public frmBuscarProductoVenta(FrmVentas frm)
+        public FrmBuscarProductoVenta(FrmVentas frm)
         {
             this.frm = frm;
             InitializeComponent();
@@ -28,7 +28,10 @@ namespace NeptunoSql.Windows
         {
             Close();
         }
-        private IServicioProductos servicio = new ServicioProductos();
+        private IServicioProductos servicioProductos = new ServicioProductos();
+        private IServicioMarcas servicioMarcas = new ServicioMarcas();
+        private IServicioCategorias servicioCategorias = new ServicioCategorias();
+
         private void frmBuscarProductoVenta_Load(object sender, EventArgs e)
         {
             CargarDatosEnGrilla();
@@ -36,7 +39,7 @@ namespace NeptunoSql.Windows
         List<Producto> lista;
         private void CargarDatosEnGrilla()
         {
-            lista = servicio.GetLista();
+            lista = servicioProductos.GetLista();
             MostrarDatosEnGrilla();
         }
 
@@ -83,6 +86,55 @@ namespace NeptunoSql.Windows
                     return;
                 }
                 frm.AgregarProductoEnVenta(producto,cantidadVendida);
+            }
+        }
+
+        private void cmbBuscarPor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbBuscarPor.SelectedIndex==0)
+            {
+                return;
+            }
+            txtBuscar.Enabled = true;
+        }
+
+        private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar==Convert.ToChar(Keys.Enter))
+            {
+                if (string.IsNullOrEmpty(txtBuscar.Text) ||
+                    string.IsNullOrWhiteSpace(txtBuscar.Text))
+                {
+                    return;
+                }
+
+                switch (cmbBuscarPor.SelectedIndex)
+                {
+                    case 1://Busco por Marca
+                        var marca = servicioMarcas.GetMarca(txtBuscar.Text);
+                        if (marca==null)
+                        {
+                            return; 
+                        }
+                        lista = servicioProductos.GetLista(marca.MarcaId);
+                        MostrarDatosEnGrilla();
+                        break;
+                    case 2://Busco por Categoria
+                        Categoria categoria = servicioCategorias.GetCategoria(txtBuscar.Text);
+                        if (categoria == null)
+                        {
+                            return;
+                        }
+                        lista = servicioProductos.GetLista(categoria);
+                        MostrarDatosEnGrilla();
+                        break;
+                    case 3://Busco por Descripcion
+                        lista = servicioProductos.GetLista(txtBuscar.Text);
+                        MostrarDatosEnGrilla();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }

@@ -183,6 +183,7 @@
             this.tsbCancelar.Size = new System.Drawing.Size(60, 59);
             this.tsbCancelar.Text = "Cancelar";
             this.tsbCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsbCancelar.Click += new System.EventHandler(this.tsbCancelar_Click);
             // 
             // tsbFinalizar
             // 
@@ -193,6 +194,7 @@
             this.tsbFinalizar.Size = new System.Drawing.Size(60, 59);
             this.tsbFinalizar.Text = "Finalizar";
             this.tsbFinalizar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsbFinalizar.Click += new System.EventHandler(this.tsbFinalizar_Click);
             // 
             // tsbConsultar
             // 
@@ -237,6 +239,7 @@
             // 
             // tsbPagar
             // 
+            this.tsbPagar.Enabled = false;
             this.tsbPagar.Image = global::NeptunoSql.Windows.Properties.Resources.receive_cash_40px;
             this.tsbPagar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbPagar.ImageTransparentColor = System.Drawing.Color.Magenta;

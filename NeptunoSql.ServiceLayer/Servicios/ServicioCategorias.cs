@@ -68,6 +68,23 @@ namespace NeptunoSql.ServiceLayer.Servicios
             }
         }
 
+        public Categoria GetCategoria(string nombreCategoria)
+        {
+            try
+            {
+                conexion = new ConexionBd();
+                repositorio = new RepositorioCategorias(conexion.AbrirConexion());
+                Categoria categoria = repositorio.GetCategoria(nombreCategoria);
+                conexion.CerrarConexion();
+                return categoria;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
         public Categoria GetCategoriaPorId(int id)
         {
             try

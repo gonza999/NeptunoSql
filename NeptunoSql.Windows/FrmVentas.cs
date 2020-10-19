@@ -29,7 +29,7 @@ namespace NeptunoSql.Windows
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            frmBuscarProductoVenta frm = new frmBuscarProductoVenta(this);
+            FrmBuscarProductoVenta frm = new FrmBuscarProductoVenta(this);
             frm.ShowDialog(this);
         }
 
@@ -48,7 +48,8 @@ namespace NeptunoSql.Windows
             tsbBuscar.Enabled = !v;
             tsbCerrar.Enabled = v;
             tsbDescuentos.Enabled = !v;
-            tsbPagar.Enabled = !v;
+            //tsbPagar.Enabled = v;
+            tsbConsultar.Enabled = v;
         }
 
         private void tsbVenta_Click(object sender, EventArgs e)
@@ -142,6 +143,7 @@ namespace NeptunoSql.Windows
             r.Cells[cmnProducto.Index].Value = producto.ToString();
             r.Cells[cmnPrecioUnitario.Index].Value = producto.PrecioUnitario;
             r.Cells[cmnCantidad.Index].Value = 1;
+            r.Cells[cmnDescuento.Index].Value = 0;
             r.Cells[cmnPrecioTotal.Index].Value =producto.PrecioUnitario;
             r.Tag = producto;
         }
@@ -163,6 +165,73 @@ namespace NeptunoSql.Windows
             r.Cells[cmnCantidad.Index].Value = cantidad;
             r.Cells[cmnPrecioTotal.Index].Value = cantidad * producto.PrecioUnitario;
             ActualizarTotales();
+        }
+
+        private void tsbCancelar_Click(object sender, EventArgs e)
+        {
+            CancelarVenta();
+        }
+
+        private void CancelarVenta()
+        {
+            InicializarGrilla();
+            InicializarTotales();
+            ManejarBarraHerramientas(true);
+        }
+
+        private void InicializarTotales()
+        {
+            txtTotal.Clear();
+            txtSubtotal.Clear();
+            txtDescuentos.Clear();
+            lblTotal.Text = "0,00";
+            txtCodigoBarra.Enabled = false;
+        }
+
+        private void InicializarGrilla()
+        {
+            dgvDatos.Rows.Clear();
+        }
+
+        private void tsbFinalizar_Click(object sender, EventArgs e)
+        {
+            if (dgvDatos.Rows.Count==0)
+            {
+                return;
+            }
+            Venta venta = new Venta();
+            venta.Fecha = DateTime.Now;
+            venta.SubTotal = CalcularTotal();
+            venta.Descuentos = CalcularTotalDescuentos();
+            venta.Total = venta.SubTotal - venta.Descuentos;
+            venta.DetalleVentas = CargarDetalleVentas();
+        }
+
+        private List<DetalleVenta> CargarDetalleVentas()
+        {
+            List<DetalleVenta> detalleVentas = new List<DetalleVenta>();
+            foreach (DataGridViewRow r in dgvDatos.Rows)
+            {
+                DetalleVenta detalleVenta = new DetalleVenta();
+                detalleVenta.Producto =(Producto) r.Tag;
+                detalleVenta.PrecioUnitario =(decimal) r.Cells[cmnPrecioUnitario.Index].Value;
+                detalleVenta.Cantidad = (decimal)r.Cells[cmnCantidad.Index].Value;
+                detalleVenta.Descuento = (decimal)r.Cells[cmnDescuento.Index].Value;
+                detalleVenta.Total = (decimal)r.Cells[cmnPrecioTotal.Index].Value;
+
+                detalleVentas.Add(detalleVenta);
+            }
+            return detalleVentas;
+        }
+
+        private decimal CalcularTotalDescuentos()
+        {
+            decimal total = 0;
+            foreach (DataGridViewRow r in dgvDatos.Rows)
+            {
+                total += (decimal)r.Cells[cmnDescuento.Index].Value;
+            }
+            return total;
         }
     }
 }

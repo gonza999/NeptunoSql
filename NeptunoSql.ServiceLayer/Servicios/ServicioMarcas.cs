@@ -117,6 +117,21 @@ namespace NeptunoSql.ServiceLayer.Servicios
             }
         }
 
+        public Marca GetMarca(string nombreMarca)
+        {
+            try
+            {
+                _conexion = new ConexionBd();
+                _repositorio = new RepositorioMarcas(_conexion.AbrirConexion());
+                var marca = _repositorio.GetMarca(nombreMarca);
+                _conexion.CerrarConexion();
+                return marca;
+            }
+            catch (Exception e)
+            {
 
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

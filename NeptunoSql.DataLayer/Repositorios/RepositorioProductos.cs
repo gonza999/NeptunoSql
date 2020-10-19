@@ -203,5 +203,80 @@ namespace NeptunoSql.DataLayer.Repositorios
                 throw new Exception(e.Message);
             }
         }
+
+        public List<Producto> GetLista(int marcaId)
+        {
+            List<Producto> lista = new List<Producto>();
+            try
+            {
+                var cadenaDeComando = "SELECT ProductoId,Descripcion,MarcaId,CategoriaId,PrecioUnitario,Stock,Suspendido " +
+                    "FROM Productos WHERE MarcaId=@id";
+                var comando = new SqlCommand(cadenaDeComando, conexion);
+                comando.Parameters.AddWithValue("@id",marcaId);
+                var reader = comando.ExecuteReader();
+                while (reader.Read())
+                {
+                    Producto producto = ConstruirProducto(reader);
+                    lista.Add(producto);
+                }
+                reader.Close();
+                return lista;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
+        public List<Producto> GetLista(Categoria categoria)
+        {
+            List<Producto> lista = new List<Producto>();
+            try
+            {
+                var cadenaDeComando = "SELECT ProductoId,Descripcion,MarcaId,CategoriaId,PrecioUnitario,Stock,Suspendido " +
+                    "FROM Productos WHERE CategoriaId=@id";
+                var comando = new SqlCommand(cadenaDeComando, conexion);
+                comando.Parameters.AddWithValue("@id", categoria.CategoriaId);
+                var reader = comando.ExecuteReader();
+                while (reader.Read())
+                {
+                    Producto producto = ConstruirProducto(reader);
+                    lista.Add(producto);
+                }
+                reader.Close();
+                return lista;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
+        public List<Producto> GetLista(string descripcion)
+        {
+            List<Producto> lista = new List<Producto>();
+            try
+            {
+                var cadenaDeComando = "SELECT ProductoId,Descripcion,MarcaId,CategoriaId,PrecioUnitario,Stock,Suspendido " +
+                    "FROM Productos WHERE Descripcion LIKE @descripcion";
+                var comando = new SqlCommand(cadenaDeComando, conexion);
+                comando.Parameters.AddWithValue("@descripcion",$"%{descripcion}%");
+                var reader = comando.ExecuteReader();
+                while (reader.Read())
+                {
+                    Producto producto = ConstruirProducto(reader);
+                    lista.Add(producto);
+                }
+                reader.Close();
+                return lista;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

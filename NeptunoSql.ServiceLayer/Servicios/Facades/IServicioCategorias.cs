@@ -11,5 +11,6 @@ namespace NeptunoSql.ServiceLayer.Servicios.Facades
         void Borrar(int id);
         bool Existe(Categoria categoria);
         bool EstaRelacionado(Categoria categoria);
+        Categoria GetCategoria(string nombreCategoria);
     }
 }

@@ -162,5 +162,29 @@ namespace NeptunoSql.DataLayer.Repositorios
         {
             return false;
         }
+
+        public Marca GetMarca(string nombreMarca)
+        {
+            try
+            {
+                Marca marca = null;
+                string cadenaComando = "SELECT MarcaId, NombreMarca FROM Marcas WHERE NombreMarca = @nombreMarca";
+                SqlCommand comando = new SqlCommand(cadenaComando, _sqlConnection);
+                comando.Parameters.AddWithValue("@nombreMarca", nombreMarca);
+                SqlDataReader reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    marca = ConstruirMarca(reader);
+                    reader.Close();
+                }
+                return marca;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
