@@ -1,4 +1,5 @@
 ﻿using NeptunoSql.BusinessLayer.Entities;
+using NeptunoSql.BusinessLayer.Entities.Enums;
 using NeptunoSql.DataLayer.Repositorios.Facades;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,49 @@ namespace NeptunoSql.DataLayer.Repositorios
     {
         private readonly SqlConnection cn;
         private readonly SqlTransaction transaction;
+        public RepositorioVentas(SqlConnection cn)
+        {
+            this.cn = cn;
+        }
 
         public RepositorioVentas(SqlConnection cn, SqlTransaction transaction)
         {
             this.cn = cn;
             this.transaction = transaction;
+        }
+
+        public void FacturarVenta(int ventaId)
+        {
+            try
+            {
+                var cadenaDeComando = "UPDATE Ventas SET Estado=@estado WHERE VentaId=@id";
+                var comando = new SqlCommand(cadenaDeComando, cn, transaction);
+                comando.Parameters.AddWithValue("@id", ventaId);
+                comando.Parameters.AddWithValue("@estado", EstadoVenta.Facturada);
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
+        public decimal GetTotalVenta(int ventaId)
+        {
+            try
+            {
+                var cadenaDeComando = "SELECT Total FROM Ventas WHERE VentaId=@id";
+                var comando = new SqlCommand(cadenaDeComando, cn, transaction);
+                comando.Parameters.AddWithValue("@id", ventaId);
+                return (decimal) comando.ExecuteScalar();
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
         }
 
         public void Guardar(Venta venta)

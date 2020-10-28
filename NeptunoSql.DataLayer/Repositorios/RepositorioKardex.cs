@@ -38,9 +38,13 @@ namespace NeptunoSql.DataLayer.Repositorios
                     kardex.Producto = producto;
                     kardex.Fecha = reader.GetDateTime(1);
                     kardex.Movimiento = reader.GetString(2);
-                    kardex.Entrada = reader.GetDecimal(3);
-                    kardex.Salida = reader.GetDecimal(4);
-                    kardex.Saldo = reader.GetDecimal(5);
+                    var Entrada =reader[3];
+                    kardex.Entrada =Convert.ToDecimal(Entrada);
+                    var Salida = reader[4];
+                    kardex.Salida = Convert.ToDecimal(Salida);
+                    var Saldo = reader[5];
+                    kardex.Saldo = Convert.ToDecimal(Saldo);
+
                 }
                 reader.Close();
                 return kardex;

@@ -24,6 +24,40 @@ namespace NeptunoSql.ServiceLayer.Servicios
         {
 
         }
+
+        public void FacturarVenta(int ventaId)
+        {
+            try
+            {
+                conexion = new ConexionBd();
+                repositorioVentas = new RepositorioVentas(conexion.AbrirConexion());
+                repositorioVentas.FacturarVenta(ventaId);
+                conexion.CerrarConexion();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
+        public decimal GetTotalVenta(int ventaId)
+        {
+            try
+            {
+                conexion = new ConexionBd();
+                repositorioVentas = new RepositorioVentas(conexion.AbrirConexion());
+                decimal total = repositorioVentas.GetTotalVenta(ventaId);
+                conexion.CerrarConexion();
+                return total;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
         public void Guardar(Venta venta)
         {
             conexion = new ConexionBd();

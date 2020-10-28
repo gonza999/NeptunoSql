@@ -29,24 +29,15 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txtCodigoBarra = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblTotal = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.tsbVenta = new System.Windows.Forms.ToolStripButton();
-            this.tsbCancelar = new System.Windows.Forms.ToolStripButton();
-            this.tsbFinalizar = new System.Windows.Forms.ToolStripButton();
-            this.tsbConsultar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbBuscar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbDescuentos = new System.Windows.Forms.ToolStripButton();
-            this.tsbPagar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbCerrar = new System.Windows.Forms.ToolStripButton();
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.txtDescuentos = new System.Windows.Forms.TextBox();
@@ -60,14 +51,27 @@
             this.cmnCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmnDescuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmnPrecioTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.cmnBorrar = new System.Windows.Forms.DataGridViewImageColumn();
+            this.tsbCerrar = new System.Windows.Forms.ToolStripButton();
+            this.tsbVenta = new System.Windows.Forms.ToolStripButton();
+            this.tsbCancelar = new System.Windows.Forms.ToolStripButton();
+            this.tsbFinalizar = new System.Windows.Forms.ToolStripButton();
+            this.tsbConsultar = new System.Windows.Forms.ToolStripButton();
+            this.tsbBuscar = new System.Windows.Forms.ToolStripButton();
+            this.tsbDescuentos = new System.Windows.Forms.ToolStripButton();
+            this.tsbAnulado = new System.Windows.Forms.ToolStripButton();
+            this.tsbPagar = new System.Windows.Forms.ToolStripButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
+            this.toolStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -81,16 +85,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(736, 47);
             this.panel1.TabIndex = 0;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::NeptunoSql.Windows.Properties.Resources.search_40px;
-            this.pictureBox1.Location = new System.Drawing.Point(77, 13);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
             // 
             // txtCodigoBarra
             // 
@@ -153,9 +147,9 @@
             this.tsbBuscar,
             this.toolStripSeparator2,
             this.tsbDescuentos,
+            this.tsbAnulado,
             this.tsbPagar,
-            this.toolStripSeparator1,
-            this.tsbCerrar});
+            this.toolStripSeparator1});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -163,108 +157,24 @@
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // tsbVenta
-            // 
-            this.tsbVenta.Image = global::NeptunoSql.Windows.Properties.Resources.buy_40px;
-            this.tsbVenta.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbVenta.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbVenta.Name = "tsbVenta";
-            this.tsbVenta.Size = new System.Drawing.Size(60, 59);
-            this.tsbVenta.Text = "Venta";
-            this.tsbVenta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsbVenta.Click += new System.EventHandler(this.tsbVenta_Click);
-            // 
-            // tsbCancelar
-            // 
-            this.tsbCancelar.Image = global::NeptunoSql.Windows.Properties.Resources.return_purchase_40px;
-            this.tsbCancelar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbCancelar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbCancelar.Name = "tsbCancelar";
-            this.tsbCancelar.Size = new System.Drawing.Size(60, 59);
-            this.tsbCancelar.Text = "Cancelar";
-            this.tsbCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsbCancelar.Click += new System.EventHandler(this.tsbCancelar_Click);
-            // 
-            // tsbFinalizar
-            // 
-            this.tsbFinalizar.Image = global::NeptunoSql.Windows.Properties.Resources.add_shopping_cart_40px;
-            this.tsbFinalizar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbFinalizar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbFinalizar.Name = "tsbFinalizar";
-            this.tsbFinalizar.Size = new System.Drawing.Size(60, 59);
-            this.tsbFinalizar.Text = "Finalizar";
-            this.tsbFinalizar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsbFinalizar.Click += new System.EventHandler(this.tsbFinalizar_Click);
-            // 
-            // tsbConsultar
-            // 
-            this.tsbConsultar.Image = global::NeptunoSql.Windows.Properties.Resources.buying_40px;
-            this.tsbConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbConsultar.Name = "tsbConsultar";
-            this.tsbConsultar.Size = new System.Drawing.Size(60, 59);
-            this.tsbConsultar.Text = "Consultar";
-            this.tsbConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(60, 6);
-            // 
-            // tsbBuscar
-            // 
-            this.tsbBuscar.Image = global::NeptunoSql.Windows.Properties.Resources.search_40px;
-            this.tsbBuscar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbBuscar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbBuscar.Name = "tsbBuscar";
-            this.tsbBuscar.Size = new System.Drawing.Size(60, 59);
-            this.tsbBuscar.Text = "Buscar";
-            this.tsbBuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsbBuscar.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(60, 6);
             // 
-            // tsbDescuentos
-            // 
-            this.tsbDescuentos.Image = global::NeptunoSql.Windows.Properties.Resources.get_a_discount_40px;
-            this.tsbDescuentos.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbDescuentos.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbDescuentos.Name = "tsbDescuentos";
-            this.tsbDescuentos.Size = new System.Drawing.Size(60, 59);
-            this.tsbDescuentos.Text = "Desc.";
-            this.tsbDescuentos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // tsbPagar
-            // 
-            this.tsbPagar.Image = global::NeptunoSql.Windows.Properties.Resources.receive_cash_40px;
-            this.tsbPagar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbPagar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbPagar.Name = "tsbPagar";
-            this.tsbPagar.Size = new System.Drawing.Size(60, 59);
-            this.tsbPagar.Text = "Pagar";
-            this.tsbPagar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(60, 6);
             // 
-            // tsbCerrar
-            // 
-            this.tsbCerrar.Image = global::NeptunoSql.Windows.Properties.Resources.close_window_40px;
-            this.tsbCerrar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbCerrar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbCerrar.Name = "tsbCerrar";
-            this.tsbCerrar.Size = new System.Drawing.Size(60, 59);
-            this.tsbCerrar.Text = "Cerrar";
-            this.tsbCerrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsbCerrar.Click += new System.EventHandler(this.toolStripButton8_Click);
-            // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.toolStrip2);
             this.panel4.Controls.Add(this.txtTotal);
             this.panel4.Controls.Add(this.txtDescuentos);
             this.panel4.Controls.Add(this.txtSubtotal);
@@ -392,6 +302,25 @@
             this.cmnPrecioTotal.Name = "cmnPrecioTotal";
             this.cmnPrecioTotal.ReadOnly = true;
             // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbCerrar});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(45, 100);
+            this.toolStrip2.TabIndex = 3;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.HeaderText = "";
+            this.dataGridViewImageColumn1.Image = global::NeptunoSql.Windows.Properties.Resources.delete_20px;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.Width = 40;
+            // 
             // cmnBorrar
             // 
             this.cmnBorrar.HeaderText = "";
@@ -399,6 +328,113 @@
             this.cmnBorrar.Name = "cmnBorrar";
             this.cmnBorrar.ReadOnly = true;
             this.cmnBorrar.Width = 40;
+            // 
+            // tsbCerrar
+            // 
+            this.tsbCerrar.Image = global::NeptunoSql.Windows.Properties.Resources.close_window_40px;
+            this.tsbCerrar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbCerrar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbCerrar.Name = "tsbCerrar";
+            this.tsbCerrar.Size = new System.Drawing.Size(42, 59);
+            this.tsbCerrar.Text = "Cerrar";
+            this.tsbCerrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsbCerrar.Click += new System.EventHandler(this.tsbCerrar_Click);
+            // 
+            // tsbVenta
+            // 
+            this.tsbVenta.Image = global::NeptunoSql.Windows.Properties.Resources.buy_40px;
+            this.tsbVenta.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbVenta.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbVenta.Name = "tsbVenta";
+            this.tsbVenta.Size = new System.Drawing.Size(60, 59);
+            this.tsbVenta.Text = "Venta";
+            this.tsbVenta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsbVenta.Click += new System.EventHandler(this.tsbVenta_Click);
+            // 
+            // tsbCancelar
+            // 
+            this.tsbCancelar.Image = global::NeptunoSql.Windows.Properties.Resources.return_purchase_40px;
+            this.tsbCancelar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbCancelar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbCancelar.Name = "tsbCancelar";
+            this.tsbCancelar.Size = new System.Drawing.Size(60, 59);
+            this.tsbCancelar.Text = "Cancelar";
+            this.tsbCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsbCancelar.Click += new System.EventHandler(this.tsbCancelar_Click);
+            // 
+            // tsbFinalizar
+            // 
+            this.tsbFinalizar.Image = global::NeptunoSql.Windows.Properties.Resources.add_shopping_cart_40px;
+            this.tsbFinalizar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbFinalizar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbFinalizar.Name = "tsbFinalizar";
+            this.tsbFinalizar.Size = new System.Drawing.Size(60, 59);
+            this.tsbFinalizar.Text = "Finalizar";
+            this.tsbFinalizar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsbFinalizar.Click += new System.EventHandler(this.tsbFinalizar_Click);
+            // 
+            // tsbConsultar
+            // 
+            this.tsbConsultar.Image = global::NeptunoSql.Windows.Properties.Resources.buying_40px;
+            this.tsbConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbConsultar.Name = "tsbConsultar";
+            this.tsbConsultar.Size = new System.Drawing.Size(60, 59);
+            this.tsbConsultar.Text = "Consultar";
+            this.tsbConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // tsbBuscar
+            // 
+            this.tsbBuscar.Image = global::NeptunoSql.Windows.Properties.Resources.search_40px;
+            this.tsbBuscar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbBuscar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbBuscar.Name = "tsbBuscar";
+            this.tsbBuscar.Size = new System.Drawing.Size(60, 59);
+            this.tsbBuscar.Text = "Buscar";
+            this.tsbBuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsbBuscar.Click += new System.EventHandler(this.toolStripButton5_Click);
+            // 
+            // tsbDescuentos
+            // 
+            this.tsbDescuentos.Image = global::NeptunoSql.Windows.Properties.Resources.get_a_discount_40px;
+            this.tsbDescuentos.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbDescuentos.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDescuentos.Name = "tsbDescuentos";
+            this.tsbDescuentos.Size = new System.Drawing.Size(60, 59);
+            this.tsbDescuentos.Text = "Desc.";
+            this.tsbDescuentos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // tsbAnulado
+            // 
+            this.tsbAnulado.Image = global::NeptunoSql.Windows.Properties.Resources.clear_shopping_cart_40px;
+            this.tsbAnulado.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbAnulado.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbAnulado.Name = "tsbAnulado";
+            this.tsbAnulado.Size = new System.Drawing.Size(60, 59);
+            this.tsbAnulado.Text = "Anulado";
+            this.tsbAnulado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsbAnulado.Click += new System.EventHandler(this.tsbAnulado_Click);
+            // 
+            // tsbPagar
+            // 
+            this.tsbPagar.Image = global::NeptunoSql.Windows.Properties.Resources.receive_cash_40px;
+            this.tsbPagar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbPagar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbPagar.Name = "tsbPagar";
+            this.tsbPagar.Size = new System.Drawing.Size(60, 59);
+            this.tsbPagar.Text = "Pagar";
+            this.tsbPagar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsbPagar.Click += new System.EventHandler(this.tsbPagar_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::NeptunoSql.Windows.Properties.Resources.search_40px;
+            this.pictureBox1.Location = new System.Drawing.Point(77, 13);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
             // FrmVentas
             // 
@@ -417,7 +453,6 @@
             this.Load += new System.EventHandler(this.FrmVentas_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -427,6 +462,9 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -459,12 +497,15 @@
         private System.Windows.Forms.ToolStripButton tsbDescuentos;
         private System.Windows.Forms.ToolStripButton tsbPagar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton tsbCerrar;
         private System.Windows.Forms.DataGridViewTextBoxColumn cmnProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn cmnPrecioUnitario;
         private System.Windows.Forms.DataGridViewTextBoxColumn cmnCantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn cmnDescuento;
         private System.Windows.Forms.DataGridViewTextBoxColumn cmnPrecioTotal;
         private System.Windows.Forms.DataGridViewImageColumn cmnBorrar;
+        private System.Windows.Forms.ToolStripButton tsbAnulado;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripButton tsbCerrar;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
     }
 }

@@ -155,7 +155,7 @@ namespace NeptunoSql.Windows
                 valido = false;
                 errorProvider1.SetError(txtReferencia, "Debe ingresar una referencia");
             }
-            if (pickerFechaStock.Value.Date >= DateTime.Today)
+            if (pickerFechaStock.Value.Date > DateTime.Today)
             {
                 valido = false;
                 errorProvider1.SetError(pickerFechaStock, "Fecha mal ingresada");

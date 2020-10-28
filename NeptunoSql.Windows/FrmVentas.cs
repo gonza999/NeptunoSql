@@ -24,10 +24,7 @@ namespace NeptunoSql.Windows
             InitializeComponent();
         }
 
-        private void toolStripButton8_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
@@ -58,7 +55,7 @@ namespace NeptunoSql.Windows
         private void ManejarBarraHerramientasPagarVentas(bool b)
         {
             tsbPagar.Enabled = b;
-            //tsbAnular.Enabled = b;
+            tsbAnulado.Enabled = b;
         }
 
         private void ManejarBarraHerramientasProductos(bool b)
@@ -85,16 +82,16 @@ namespace NeptunoSql.Windows
         private IServicioProductos servicio;
         private void txtCodigoBarra_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar==Convert.ToChar(Keys.Enter))
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
             {
                 if (string.IsNullOrEmpty(txtCodigoBarra.Text) ||
                     string.IsNullOrWhiteSpace(txtCodigoBarra.Text))
                 {
                     return;
                 }
-                Producto producto=servicio.GetProductoPorCodigoDeBarras(txtCodigoBarra.Text);
+                Producto producto = servicio.GetProductoPorCodigoDeBarras(txtCodigoBarra.Text);
 
-                if (producto==null)
+                if (producto == null)
                 {
                     //TODO: Se puede sacar un msj de error
                     return;
@@ -119,7 +116,7 @@ namespace NeptunoSql.Windows
             decimal total = 0;
             foreach (DataGridViewRow r in dgvDatos.Rows)
             {
-                total +=(decimal) r.Cells[cmnPrecioTotal.Index].Value;
+                total += Convert.ToDecimal(r.Cells[cmnPrecioTotal.Index].Value);
             }
             return total;
         }
@@ -127,9 +124,9 @@ namespace NeptunoSql.Windows
         private void AgregarProductoEnGrilla(Producto producto)
         {
             var r = Helper.ConstruirFila(ref dgvDatos);
-            SetearFila(r,producto);
+            SetearFila(r, producto);
             AgregarFila(r);
-            var index = InformarUltimaFilaAgregada()-1;
+            var index = InformarUltimaFilaAgregada() - 1;
             IngresarCantidad(index);
         }
 
@@ -150,7 +147,7 @@ namespace NeptunoSql.Windows
             celdaCantidad.Value = cantidadVendida;
             DataGridViewCell celdaPrecio = dgvDatos.Rows[index].Cells[cmnPrecioUnitario.Index];
             DataGridViewCell celdaTotal = dgvDatos.Rows[index].Cells[cmnPrecioTotal.Index];
-            celdaTotal.Value = cantidadVendida*(decimal)celdaPrecio.Value;
+            celdaTotal.Value = cantidadVendida * (decimal)celdaPrecio.Value;
         }
 
         private int InformarUltimaFilaAgregada()
@@ -169,20 +166,20 @@ namespace NeptunoSql.Windows
             r.Cells[cmnPrecioUnitario.Index].Value = producto.PrecioUnitario;
             r.Cells[cmnCantidad.Index].Value = 1;
             r.Cells[cmnDescuento.Index].Value = 0;
-            r.Cells[cmnPrecioTotal.Index].Value =producto.PrecioUnitario;
+            r.Cells[cmnPrecioTotal.Index].Value = producto.PrecioUnitario;
             r.Tag = producto;
         }
 
         private void dgvDatos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex==5)
+            if (e.ColumnIndex == 5)
             {
                 dgvDatos.Rows.RemoveAt(e.RowIndex);
                 ActualizarTotales();
             }
         }
 
-        public void AgregarProductoEnVenta(Producto producto,decimal cantidad)
+        public void AgregarProductoEnVenta(Producto producto, decimal cantidad)
         {
             var r = Helper.ConstruirFila(ref dgvDatos);
             SetearFila(r, producto);
@@ -194,17 +191,19 @@ namespace NeptunoSql.Windows
 
         private void tsbCancelar_Click(object sender, EventArgs e)
         {
-            CancelarVenta();
+            InicializarControlesVenta();
         }
 
-        private void CancelarVenta()
+        private void InicializarControlesVenta()
         {
             InicializarGrilla();
             InicializarTotales();
             ManejarBarraHerramientasVentas(true);
             ManejarBarraHerramientasProductos(false);
             ManejarBarraHerramientasPagarVentas(false);
-            ManejarBarraHerramientasFinalVentas(true);
+            ManejarBarraHerramientasFinalVentas(false);
+
+            txtCodigoBarra.Enabled = false;
         }
 
         private void InicializarTotales()
@@ -221,9 +220,10 @@ namespace NeptunoSql.Windows
             dgvDatos.Rows.Clear();
         }
         private IServicioVentas servicioVentas;
+        private int ventaId = 0;
         private void tsbFinalizar_Click(object sender, EventArgs e)
         {
-            if (dgvDatos.Rows.Count==0)
+            if (dgvDatos.Rows.Count == 0)
             {
                 return;
             }
@@ -236,12 +236,19 @@ namespace NeptunoSql.Windows
             venta.DetalleVentas = CargarDetalleVentas();
             try
             {
+                servicioVentas.Guardar(venta);
+                ventaId = venta.VentaId;//Para anular o pagar la venta
+                Helper.MensajeBox($"Venta número {venta.VentaId} guardada", Tipo.Success);
+
+                ManejarBarraHerramientasFinalVentas(false);
+                ManejarBarraHerramientasVentas(false);
+                ManejarBarraHerramientasProductos(false);
+                ManejarBarraHerramientasPagarVentas(true);
 
             }
             catch (Exception ex)
             {
-                Helper.MensajeBox(ex.Message,Tipo.Error);
-                
+                Helper.MensajeBox(ex.Message, Tipo.Error);
             }
         }
 
@@ -251,8 +258,8 @@ namespace NeptunoSql.Windows
             foreach (DataGridViewRow r in dgvDatos.Rows)
             {
                 DetalleVenta detalleVenta = new DetalleVenta();
-                detalleVenta.Producto =(Producto) r.Tag;
-                detalleVenta.PrecioUnitario =(decimal) r.Cells[cmnPrecioUnitario.Index].Value;
+                detalleVenta.Producto = (Producto)r.Tag;
+                detalleVenta.PrecioUnitario = (decimal)r.Cells[cmnPrecioUnitario.Index].Value;
                 detalleVenta.Cantidad = (decimal)r.Cells[cmnCantidad.Index].Value;
                 detalleVenta.Descuento = Convert.ToDecimal(r.Cells[cmnDescuento.Index].Value);
                 detalleVenta.Total = (decimal)r.Cells[cmnPrecioTotal.Index].Value;
@@ -270,6 +277,42 @@ namespace NeptunoSql.Windows
                 total += Convert.ToDecimal(r.Cells[cmnDescuento.Index].Value);
             }
             return total;
+        }
+
+        private void tsbPagar_Click(object sender, EventArgs e)
+        {
+            FrmPago frm = new FrmPago();
+            frm.Text = "Pago de Venta";
+            var importeVenta = servicioVentas.GetTotalVenta(ventaId);
+            frm.SetImporteYVenta(importeVenta, ventaId);
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.OK)
+            {
+                try
+                {
+                    servicioVentas.FacturarVenta(ventaId);
+                    Helper.MensajeBox($"Venta número {ventaId} facturada", Tipo.Success);
+                    InicializarControlesVenta();
+                    ventaId = 0;
+                }
+                catch (Exception ex)
+                {
+                    Helper.MensajeBox(ex.Message, Tipo.Error);
+                }
+            }
+        }
+
+        private void tsbCerrar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void tsbAnulado_Click(object sender, EventArgs e)
+        {
+            ManejarBarraHerramientasFinalVentas(true);
+            ManejarBarraHerramientasVentas(false);
+            ManejarBarraHerramientasProductos(false);
+            ManejarBarraHerramientasPagarVentas(false);
         }
     }
 }
