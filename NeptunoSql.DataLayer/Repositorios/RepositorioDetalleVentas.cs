@@ -22,7 +22,25 @@ namespace NeptunoSql.DataLayer.Repositorios
 
         public void Guardar(DetalleVenta detalle)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var cadenaDeComando = "INSERT INTO DetalleVentas (VentaId,ProductoId,PrecioUnitario,Cantidad,Descuento,PrecioTotal,KardexId)" +
+                    "VALUES (@venta,@producto,@precio,@cantidad,@desc,@total,@kardex)";
+                var comando = new SqlCommand(cadenaDeComando, cn, transaction);
+                comando.Parameters.AddWithValue("@venta", detalle.Venta.VentaId);
+                comando.Parameters.AddWithValue("@producto", detalle.Producto.ProductoId);
+                comando.Parameters.AddWithValue("@precio",detalle.PrecioUnitario);
+                comando.Parameters.AddWithValue("@cantidad", detalle.Cantidad);
+                comando.Parameters.AddWithValue("@desc",detalle.Descuento);
+                comando.Parameters.AddWithValue("@total",detalle.Total);
+                comando.Parameters.AddWithValue("@kardex", detalle.Kardex.KardexId);
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ namespace NeptunoSql.ServiceLayer.Servicios
 {
     public class ServicioIngresos:IServicioIngresos
     {
-        private IRepositorioVentas repositorioVentas;
+        private IRepositorioIngresos repositorioIngresos;
         private IRepositorioDetallesIngresos repositorioDetalleIngresos;
         private IRepositorioProductos repositorioProductos;
         private IRepositorioKardex repositorioKardex;
@@ -33,12 +33,12 @@ namespace NeptunoSql.ServiceLayer.Servicios
             {
                 SqlConnection cn = conexion.AbrirConexion();
                 transaction = cn.BeginTransaction();
-                repositorioVentas = new RepositorioIngresos(cn,transaction);
+                repositorioIngresos = new RepositorioIngresos(cn,transaction);
                 repositorioDetalleIngresos = new RepositorioDetallesIngresos(cn, transaction);
                 repositorioProductos = new RepositorioProductos(cn, transaction);
                 repositorioKardex = new RepositorioKardex(transaction,cn);
 
-                repositorioVentas.Guardar(ingreso);
+                repositorioIngresos.Guardar(ingreso);
                 foreach (var detalleIngreso in ingreso.DetalleIngresos)
                 {
                     detalleIngreso.Ingreso = ingreso;

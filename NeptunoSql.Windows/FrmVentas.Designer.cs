@@ -239,7 +239,6 @@
             // 
             // tsbPagar
             // 
-            this.tsbPagar.Enabled = false;
             this.tsbPagar.Image = global::NeptunoSql.Windows.Properties.Resources.receive_cash_40px;
             this.tsbPagar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbPagar.ImageTransparentColor = System.Drawing.Color.Magenta;

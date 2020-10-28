@@ -1,8 +1,10 @@
 ﻿using Microsoft.VisualBasic;
 using NeptunoSql.BusinessLayer.Entities;
+using NeptunoSql.BusinessLayer.Entities.Enums;
 using NeptunoSql.ServiceLayer.Servicios;
 using NeptunoSql.ServiceLayer.Servicios.Facades;
 using NeptunoSql.Windows.Helpers;
+using NeptunoSql.Windows.Helpers.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,26 +37,49 @@ namespace NeptunoSql.Windows
 
         private void FrmVentas_Load(object sender, EventArgs e)
         {
-            ManejarBarraHerramientas(true);
             txtCodigoBarra.Enabled = false;
             servicio = new ServicioProductos();
+            servicioVentas = new ServicioVentas();
+            ManejarBarraHerramientasVentas(true);
+            ManejarBarraHerramientasProductos(false);
+            ManejarBarraHerramientasPagarVentas(false);
+            ManejarBarraHerramientasFinalVentas(false);
+
+
         }
 
-        private void ManejarBarraHerramientas(bool v)
+
+        private void ManejarBarraHerramientasFinalVentas(bool b)
         {
-            tsbVenta.Enabled = v;
-            tsbCancelar.Enabled = !v;
-            tsbFinalizar.Enabled = !v;
-            tsbBuscar.Enabled = !v;
-            tsbCerrar.Enabled = v;
-            tsbDescuentos.Enabled = !v;
-            //tsbPagar.Enabled = v;
-            tsbConsultar.Enabled = v;
+            tsbCancelar.Enabled = b;
+            tsbFinalizar.Enabled = b;
+        }
+
+        private void ManejarBarraHerramientasPagarVentas(bool b)
+        {
+            tsbPagar.Enabled = b;
+            //tsbAnular.Enabled = b;
+        }
+
+        private void ManejarBarraHerramientasProductos(bool b)
+        {
+            tsbBuscar.Enabled = b;
+            tsbDescuentos.Enabled = b;
+        }
+
+        private void ManejarBarraHerramientasVentas(bool b)
+        {
+            tsbVenta.Enabled = b;
+            tsbConsultar.Enabled = b;
+            tsbCerrar.Enabled = b;
         }
 
         private void tsbVenta_Click(object sender, EventArgs e)
         {
-            ManejarBarraHerramientas(false);
+            ManejarBarraHerramientasVentas(false);
+            ManejarBarraHerramientasProductos(true);
+            ManejarBarraHerramientasPagarVentas(false);
+            ManejarBarraHerramientasFinalVentas(true);
             txtCodigoBarra.Enabled = true;
         }
         private IServicioProductos servicio;
@@ -176,7 +201,10 @@ namespace NeptunoSql.Windows
         {
             InicializarGrilla();
             InicializarTotales();
-            ManejarBarraHerramientas(true);
+            ManejarBarraHerramientasVentas(true);
+            ManejarBarraHerramientasProductos(false);
+            ManejarBarraHerramientasPagarVentas(false);
+            ManejarBarraHerramientasFinalVentas(true);
         }
 
         private void InicializarTotales()
@@ -192,7 +220,7 @@ namespace NeptunoSql.Windows
         {
             dgvDatos.Rows.Clear();
         }
-
+        private IServicioVentas servicioVentas;
         private void tsbFinalizar_Click(object sender, EventArgs e)
         {
             if (dgvDatos.Rows.Count==0)
@@ -204,7 +232,17 @@ namespace NeptunoSql.Windows
             venta.SubTotal = CalcularTotal();
             venta.Descuentos = CalcularTotalDescuentos();
             venta.Total = venta.SubTotal - venta.Descuentos;
+            venta.Estado = EstadoVenta.EnProceso;
             venta.DetalleVentas = CargarDetalleVentas();
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MensajeBox(ex.Message,Tipo.Error);
+                
+            }
         }
 
         private List<DetalleVenta> CargarDetalleVentas()
@@ -216,7 +254,7 @@ namespace NeptunoSql.Windows
                 detalleVenta.Producto =(Producto) r.Tag;
                 detalleVenta.PrecioUnitario =(decimal) r.Cells[cmnPrecioUnitario.Index].Value;
                 detalleVenta.Cantidad = (decimal)r.Cells[cmnCantidad.Index].Value;
-                detalleVenta.Descuento = (decimal)r.Cells[cmnDescuento.Index].Value;
+                detalleVenta.Descuento = Convert.ToDecimal(r.Cells[cmnDescuento.Index].Value);
                 detalleVenta.Total = (decimal)r.Cells[cmnPrecioTotal.Index].Value;
 
                 detalleVentas.Add(detalleVenta);
@@ -229,7 +267,7 @@ namespace NeptunoSql.Windows
             decimal total = 0;
             foreach (DataGridViewRow r in dgvDatos.Rows)
             {
-                total += (decimal)r.Cells[cmnDescuento.Index].Value;
+                total += Convert.ToDecimal(r.Cells[cmnDescuento.Index].Value);
             }
             return total;
         }

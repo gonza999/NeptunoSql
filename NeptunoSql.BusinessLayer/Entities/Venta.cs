@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeptunoSql.BusinessLayer.Entities.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,5 +20,7 @@ namespace NeptunoSql.BusinessLayer.Entities
         public decimal Total { get; set; }
 
         public List<DetalleVenta> DetalleVentas { get; set; } = new List<DetalleVenta>();
+
+        public EstadoVenta Estado { get; set; }
     }
 }

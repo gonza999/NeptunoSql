@@ -47,23 +47,23 @@ namespace NeptunoSql.ServiceLayer.Servicios
                         kardex = new Kardex();
                         kardex.Producto = detalleVenta.Producto;
                         kardex.Fecha = venta.Fecha;
-                        kardex.Movimiento = $"Ingreso numero {venta.VentaId}";
-                        kardex.Entrada = detalleVenta.Cantidad;
-                        kardex.Salida = 0;
+                        kardex.Movimiento = $"Venta numero {venta.VentaId}";
+                        kardex.Entrada = 0;
+                        kardex.Salida = detalleVenta.Cantidad;
                         kardex.Saldo = detalleVenta.Cantidad;
                     }
                     else
                     {
                         kardex.Fecha = venta.Fecha;
-                        kardex.Movimiento = $"Ingreso numero {venta.VentaId}";
-                        kardex.Entrada = detalleVenta.Cantidad;
-                        kardex.Salida = 0;
-                        kardex.Saldo += detalleVenta.Cantidad;
+                        kardex.Movimiento = $"Venta numero {venta.VentaId}";
+                        kardex.Entrada = 0;
+                        kardex.Salida = detalleVenta.Cantidad;
+                        kardex.Saldo -= detalleVenta.Cantidad;
                     }
                     repositorioKardex.Guardar(kardex);
                     detalleVenta.Kardex = kardex;
                     repositorioDetalleVentas.Guardar(detalleVenta);
-                    repositorioProductos.ActualizarStock(detalleVenta.Producto, detalleVenta.Cantidad);
+                    repositorioProductos.ActualizarStock(detalleVenta.Producto, -detalleVenta.Cantidad);
                 }
                 transaction.Commit();
             }

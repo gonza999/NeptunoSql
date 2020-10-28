@@ -24,13 +24,14 @@ namespace NeptunoSql.DataLayer.Repositorios
         {
             try
             {
-                var cadenaDeComando = "INSERT INTO Ventas(Fecha,SubTotal,Descuentos,Total)" +
-                    "VALUES (@fecha,@sub,@desc,@total)";
+                var cadenaDeComando = "INSERT INTO Ventas(Fecha,SubTotal,Descuentos,Total,Estado)" +
+                    "VALUES (@fecha,@sub,@desc,@total,@estado)";
                 var comando = new SqlCommand(cadenaDeComando, cn, transaction);
                 comando.Parameters.AddWithValue("@fecha", venta.Fecha);
                 comando.Parameters.AddWithValue("@sub", venta.SubTotal);
                 comando.Parameters.AddWithValue("@desc", venta.Descuentos);
                 comando.Parameters.AddWithValue("@total", venta.Total);
+                comando.Parameters.AddWithValue("@estado", venta.Estado);
                 comando.ExecuteNonQuery();
                 cadenaDeComando = "SELECT @@IDENTITY";
                 comando = new SqlCommand(cadenaDeComando, cn, transaction);
